@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" media="all" href="style-login.css" />
+    <title>LOGIN</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+        <div class="center transparencia">
+            <h1>Iniciar sesión</h1>
+            <form>
+                <div class="txt_field">
+                    <label>Correo electronico</label>
+                    <input v-model="correocon" type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com" required>
+                </div> 
+                <div class="txt_field">
+                    <label>Contraseña</label>
+                    <input v-model="contracon" type="password" class="form-control" id="floatingPassword" placeholder="contraseña" required>
+                </div> 
+                <br> 
+                <div class="d-grid gap-2">
+                    <div class="centrado">
+                        <div class="btn btn-outline-dark" v-on:click="LoginTry" type="submit"> Ingresar </div>    
+                    </div>
+                <br>
+                <div class="pass" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="recuperarcontra@uttcampues.edu.mx">
+                ¿Olvidaste tu contraseña?
+                </div>
+            </form>
+        </div>
+    </div> 
+    <!-- Recuperar contraseña (MODAL) -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <!--<h5 class="modal-title" id="exampleModalLabel">Nuevo mensaje</h5> -->
+                <h5> Recuperar contraseña </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                <form>
+                    <!-- Destinatario / Recipiente -->
+                    <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Destinatario:</label>
+                    <input type="text" class="form-control" id="recipient-name" v-bind:placeholder="corr_rec" disabled>
+                    </div>
+                    <!-- Textarea mensaje -->
+                    <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Inserte sus datos:</label>
+                    <textarea class="form-control" id="message-text" v-model="cuerpo"></textarea>
+                    </div>
+                </form>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <a type="button" class="btn btn-primary" :href="refcorreo" target="_blank">Enviar correo</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- VUE -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- AXIOS -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Archivo JS LOGIN -->
+<script>
+     //MENSAJE
+     var vm = new Vue ({
+           el: "#app", //Elemento
+           data: { 
+               corr_rec: "recuperarcontra@uttcampues.edu.mx",
+               correocon: "",
+               contracon: "",
+               Respuesta: "",
+               idcon: "",
+               cuerpo: "",
+               AuxCuerpo: "",
+               ResultadoConsulta:[
+                   {Con_usuario:""}
+               ]
+           },
+           methods:{        
+               LoginTry: function (event) {
+                   axios({
+                       method: 'POST',
+                       url: '/src/accountlogin.php',
+                       data: {
+                           correocon: this.correocon,
+                           contracon: this.contracon
+                       }
+                   }) .then((response) => {
+                       this.ResultadoConsulta=response.data;
+                       this.Respuesta = this.ResultadoConsulta["Con_usuario"];
+                       this.idcon = this.ResultadoConsulta["Con_id"];
+                       this.Redireccion();
+                   })
+               },
+               Redireccion: function (event) {
+                   localStorage.setItem("correocon", this.correocon);
+                   localStorage.setItem("idcon", this.idcon);
+                   localStorage.setItem("rol", this.Respuesta);
+                   switch (this.Respuesta) {
+                       case 'Admin':
+                       window.location.href = '/admins/ad_avisos.html'
+                           break;
+                       case 'Maestro':
+                       window.location.href = '/profe/ma_avisos.html'
+                           break;
+                       case 'Alumno':
+                       window.location.href = '/alumno/al_avisos.html'
+                           break;
+                       case 'No registrado':
+                           alert("Correo o contraseña incorrecto");
+                           break;
+                       default:
+                           alert("Error al enviar información");
+                       break;
+                   }
+               },
+               Formatear: function () {
+                localStorage.setItem("idcon", "0");
+                localStorage.setItem("rol", "No registrado");
+               }
+           },
+           created(){
+               //CARGA VARIABLE GLOBAL
+               let data = localStorage.getItem("correocon"); //Correo
+               if (data != null) {
+                   this.correocon = data;
+               }
+               let data2 = localStorage.getItem("idcon"); // ID
+               if (data2 != null) {
+                this.Formatear();
+               }
+           },
+           computed: {
+            refcorreo: function () {
+                this.AuxCuerpo = this.cuerpo.replace(/ /g, "%20");
+                return ("mailto:" + this.corr_rec + "?subject=Olvidé%20mi%20contraseña&body=" + this.AuxCuerpo);
+                //return ("mailto:Carlos.lpz.2k02@gmail.com?subject=Olvidé%20mi%20contraseña&body=Este%20es%20el%20cuerpo%20del%20mensaje");
+            }
+           }
+       });
+</script>
+
+</body>
+</html>
