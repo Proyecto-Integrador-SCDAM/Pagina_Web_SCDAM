@@ -1,0 +1,23 @@
+.center{ 
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 930px;
+    background-color: #f3f3f3;
+    border-radius: 35px;
+    }
+    .center h4{ 
+        text-align: center;
+        padding: 6px ;
+        border-bottom: 3px solid #3AAFA9;
+    }
+    .center form{ 
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    form .cent{ 
+        position: relative;
+        border-bottom: 3px solid #3AAFA9;
+        margin: 30px;
+    }

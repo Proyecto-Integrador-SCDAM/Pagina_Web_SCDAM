@@ -13,12 +13,34 @@
     <style>
         .inicio{
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content:start;
-        align-items: flex-start;
-        padding: 3em; 
+        display: grid;
+        grid-template-columns: repeat(4fr, 25%);
+        grid-template-rows: repeat(4fr, 25%);
+        padding: 20px;
+        height: 100vh;
+        width: 100vw;
+    }
+    .texto1{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        padding: 10px;
+    }
+    .texto2{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 2;
+        padding:10px;
+    }
+    .imagen{
+        grid-column-start:2 ;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        height: 62vh;
+        width: 50vw;
     }
     .redes{
         padding: 100px;
@@ -69,21 +91,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="centrado">
+                <div class="Centrar">
                     <h1>NOMBRE DE LA ESCUELA</h1>        
             </div>
-            <div class="inicio">
-                    <h4> Dirección:  <br/><br/> <br/><br/> Teléfono/s: <br/><br/></h4>  
-            </div>   
-            <div class="redes">
-                <strong><h5>SÍGUENOS</h5></strong>
-                <ul class="redsocial">
-                    <li><a href="https://www.facebook.com/"> <img src="../imagenes/facebook.png.crdownload" alt="1x1" width="50" height="50"></a></li>
-                    <li><a href="https://www.instagram.com/"> <img src="../imagenes/insta.png" alt="1x1" width="50" height="50"></a></li>
-                    <li><a href="https://www.twitter.com/"> <img src="../imagenes/twiteer.png" alt="1x1" width="50" height="50"></a></li>
-                    <li><a href="https://www.youtube.com/"> <img src="../imagenes/youtube.png" alt="1x1" width="50" height="50"></a></li>
-                </ul>
-            </div>                  
+        <div class="inicio">
+                <div class="texto1">
+                    <h3> Dirección: </h3>
+                    <p> Carretera Torreón - Matamoros Km 10, S/N, Ejido el Águila, 27400 Torreón, Coah.</p>
+                    
+                    <h3>Teléfono/s:</h3>
+                    <p>General: <span>8711023424</span><p>
+                    <p>Contabilidad: <span>8714025674</span><p>
+                    <p>Servicio Escolar: <span>8711768424</span></p>
+
+                    <div class="redes">
+                        <strong><h5>SÍGUENOS</h5></strong>
+                        <ul class="redsocial footer">
+                            <li><a href="https://www.facebook.com/"> <img src="../imagenes/facebook.png.crdownload" alt="1x1" width="50" height="50"></a></li>
+                            <li><a href="https://www.instagram.com/"> <img src="../imagenes/insta.png" alt="1x1" width="50" height="50"></a></li>
+                            <li><a href="https://www.twitter.com/"> <img src="../imagenes/logo-twitter.jpeg" alt="1x1" width="50" height="50"></a></li>
+                            <li><a href="https://www.youtube.com/"> <img src="../imagenes/youtube.png" alt="1x1" width="50" height="50"></a></li>
+                        </ul>
+                    </div> 
+                </div>
+               
+                <iframe class="imagen" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14400.755722003762!2d-103.3209182!3d25.5320829!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc18fad7b464487e4!2sUniversidad%20Tecnol%C3%B3gica%20de%20Torre%C3%B3n!5e0!3m2!1ses!2smx!4v1627930311630!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+             
+            
+        </div>                 
         </div>
 
             <!-- CONTENIDO (Página) -->

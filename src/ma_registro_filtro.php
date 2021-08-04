@@ -8,13 +8,19 @@ $data = array();
 //RECIBIR VARIABLES
 $recibirjson = json_decode(file_get_contents('php://input'), true);
 $searchval = $recibirjson['searchval'];
+$idcon = $recibirjson['idcon'];
+
 
 //CONSULTAS
 //CONSULTAR ID PERSONA
 try {
-    $stmt = $pdo->query('SELECT registro.id_reg, concat(personas.nombre, " ", personas.apellido_paterno, " ", personas.apellido_materno) AS "nombre", registro.estado, registro.fecha_hora 
+    $stmt = $pdo->query('SELECT registro.id_reg, concat(personas.nombre, " ", personas.apellido_paterno, " ", personas.apellido_materno) AS "nombre", 
+    registro.estado, registro.fecha_hora 
     FROM personas inner join registro on personas.id_per=registro.persona_r 
-    WHERE concat(personas.nombre, " ", personas.apellido_paterno, " ", personas.apellido_materno) LIKE ' . '"%' . $searchval . '%" 
+    WHERE personas.id_per 
+    IN (SELECT info_alu.ID_PERSONA FROM info_alu WHERE info_alu.CLAVE_GRUPO 
+    IN (SELECT prof_grupos.CLAVE_GRUPO FROM prof_grupos WHERE prof_grupos.CLAVE_PROFESOR=' . $idcon . ')) 
+    AND concat(personas.nombre, " ", personas.apellido_paterno, " ", personas.apellido_materno) LIKE ' . '"%' . $searchval . '%" 
     ORDER BY registro.fecha_hora DESC');
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     
