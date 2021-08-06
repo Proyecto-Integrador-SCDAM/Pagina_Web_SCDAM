@@ -6,7 +6,7 @@ var vmRedLogin = new Vue ({
     methods:{        
 
         Redireccion: function (event) {
-            window.location.href = 'http://scdam.web/index.html'
+            window.location.href = '../../index.html'
         },
     },
     created(){

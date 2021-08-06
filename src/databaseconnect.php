@@ -1,4 +1,8 @@
 <?php
+
+//namespace proyecto;
+
+//require("../vendor/autoload.php");
 require_once 'pdoconfig.php';
 
 try {

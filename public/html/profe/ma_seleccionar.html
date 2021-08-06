@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar</title>
-    <link rel="stylesheet" media="all" href="../stylebase.css"/>
-    <link rel="stylesheet" media="all" href="../style-buscar-alumno.css"/>
+    <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
+    <link rel="stylesheet" media="all" href="../../css/style-buscar-alumno.css"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -20,7 +20,7 @@
 
                     <div class="Banner-grid-item-izq" id="azul2" v-on:click="Volver">
                         <div class="Centrar">
-                            <img v-if="c_volver == 1" src="../imagenes/volver-flecha.png" height="50%" width="30%">
+                            <img v-if="c_volver == 1" src="../../imagenes/volver-flecha.png" height="50%" width="30%">
                         </div>
                     </div>
 
@@ -32,7 +32,7 @@
 
                     <div class="Banner-grid-item-der cerrarses" id="azul2" v-on:click="CerrarSesion">
                         <div class="Centrar"> 
-                            <img src="../imagenes/apagar.png" height="50%" width="30%">
+                            <img src="../../imagenes/apagar.png" height="50%" width="30%">
                         </div>
                     </div>
 
@@ -41,18 +41,6 @@
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
-
-            <!-- BOTONES -->
-            <div class="grid-itemContenido">
-              <div class="Banner-grid-container-filtros">
-                <div class="Banner-grid-item-izq-filtros " id="azul3">
-                  <div class="d-grid">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAdministradores">Buscar administrador</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelProfesores">Buscar profesor</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo alumno</button>
-                </div>
-              </div>
-            </div>
 
               <!-- INPUT -->
               <div class="input-group mb-3 EspacioSup">
@@ -179,11 +167,12 @@
               CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../src/ad_buscar_alumnos.php',
+                       url: '../../../src/ma_buscar_alumnos.php',
                        action: 'fetchall',
                        data: {
                            filtro: this.filtro,
-                           orden: this.orden
+                           orden: this.orden,
+                           correo: this.correo
                       }
                    }) .then((response) => {
                     this.allData = response.data;
@@ -192,12 +181,13 @@
                Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../src/ad_buscar_alumnos_filtro.php',
+                       url: '../../../src/ma_buscar_alumnos_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
                            filtro: this.filtro,
-                           orden: this.orden
+                           orden: this.orden,
+                           correo: this.correo
                       }
                    }) .then((response) => {
                     this.allData = response.data;
@@ -206,7 +196,7 @@
                 EditarPersona:function(event)
                 {
                   localStorage.setItem("editarper", event);
-                  window.location.href = "ad_cambios_alumno.html" 
+                  window.location.href = "ma_info_alu.html" 
                 },
                 Ordenar: function (event) {
                 this.orden=event;
@@ -220,25 +210,15 @@
                     window.location.href = "../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_avisos.html"
+                    window.location.href = "ma_avisos.html"
                 },
-                Alumno1: function (event) {
-                    window.location.href = "ad_cambios_alumno.html"
-                },
-                SelProfesores:function(event)
-                {
-                  window.location.href = "ad_seleccionar_maestro.html" 
-                },
-                SelAdministradores:function(event)
-                {
-                  window.location.href = "ad_seleccionar_admin.html" 
-                },
-                DarAlta:function(event)
-                {
-                  window.location.href = "ad_alta_alumno.html" 
-                }
             },
             created: function(){
+              //CARGAR VARIABLES GLOBALES
+              let data = localStorage.getItem("correocon"); //global correo
+               if (data != null) {
+                   this.correo = data;
+               }
               this.CargarTabla();
             },
             computed: {

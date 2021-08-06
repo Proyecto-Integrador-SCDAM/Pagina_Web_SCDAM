@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" media="all" href="style-login.css" />
+    <link rel="stylesheet" media="all" href="css/style-login.css" />
     <title>LOGIN</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -84,43 +84,44 @@
                corr_rec: "recuperarcontra@uttcampues.edu.mx",
                correocon: "",
                contracon: "",
-               Respuesta: "",
+               TipoUsuario: "",
                idcon: "",
                cuerpo: "",
                AuxCuerpo: "",
-               ResultadoConsulta:[
-                   {Con_usuario:""}
-               ]
+               ResultadoConsulta:[],
            },
-           methods:{        
-               LoginTry: function (event) {
-                   axios({
-                       method: 'POST',
-                       url: '/src/accountlogin.php',
-                       data: {
-                           correocon: this.correocon,
-                           contracon: this.contracon
-                       }
-                   }) .then((response) => {
-                       this.ResultadoConsulta=response.data;
-                       this.Respuesta = this.ResultadoConsulta["Con_usuario"];
-                       this.idcon = this.ResultadoConsulta["Con_id"];
-                       this.Redireccion();
-                   })
-               },
+           methods:{
+               LoginTry:function(){
+                    var params = new URLSearchParams();
+                    params.append('correocon', this.correocon);
+                    params.append('contracon', this.contracon);
+
+                    axios.post('controller_login.php', params)
+
+                    .then((response) => {
+                        console.log(response);
+                        this.ResultadoConsulta=response.data;
+                        this.TipoUsuario = this.ResultadoConsulta["Con_usuario"];
+                        this.idcon = this.ResultadoConsulta["Con_id"];
+                        this.Redireccion();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                },
                Redireccion: function (event) {
                    localStorage.setItem("correocon", this.correocon);
                    localStorage.setItem("idcon", this.idcon);
-                   localStorage.setItem("rol", this.Respuesta);
-                   switch (this.Respuesta) {
+                   localStorage.setItem("rol", this.TipoUsuario);
+                   switch (this.TipoUsuario) {
                        case 'Admin':
-                       window.location.href = '/admins/ad_avisos.html'
+                       window.location.href = 'html/admins/ad_avisos.html'
                            break;
                        case 'Maestro':
-                       window.location.href = '/profe/ma_avisos.html'
+                       window.location.href = 'html/profe/ma_avisos.html'
                            break;
                        case 'Alumno':
-                       window.location.href = '/alumno/al_avisos.html'
+                       window.location.href = 'html/alumno/al_avisos.html'
                            break;
                        case 'No registrado':
                            alert("Correo o contraseña incorrecto");

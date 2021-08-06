@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar</title>
-    <link rel="stylesheet" media="all" href="../stylebase.css"/>
-    <link rel="stylesheet" media="all" href="../style.css"/>
+    <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
+    <link rel="stylesheet" media="all" href="../../css/style.css"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+    
     <!-- VUE -->
     <div id="app">
         <div class="grid-container" id="fixed">
@@ -20,7 +21,7 @@
 
                     <div class="Banner-grid-item-izq" id="azul2" v-on:click="Volver">
                         <div class="Centrar">
-                            <img v-if="c_volver == 1" src="../imagenes/volver-flecha.png" height="50%" width="30%">
+                            <img v-if="c_volver == 1" src="../../imagenes/volver-flecha.png" height="50%" width="30%">
                         </div>
                     </div>
 
@@ -32,7 +33,7 @@
 
                     <div class="Banner-grid-item-der cerrarses" id="azul2" v-on:click="CerrarSesion">
                         <div class="Centrar"> 
-                            <img src="../imagenes/apagar.png" height="50%" width="30%">
+                            <img src="../../imagenes/apagar.png" height="50%" width="30%">
                         </div>
                     </div>
 
@@ -47,9 +48,9 @@
                 <div class="Banner-grid-container-filtros">
                   <div class="Banner-grid-item-izq-filtros " id="azul3">
                     <div class="d-grid">
-                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAdministradores">Buscar administrador</button>
                       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAlumnos">Buscar alumnos</button>
-                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo profesor</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelProfesores">Buscar profesores</button>
+                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo administrador</button>
                   </div>
                 </div>
               </div>
@@ -106,7 +107,7 @@
                 </div>
 
             </div>
-        </div>        
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -114,7 +115,8 @@
     <!-- VUE JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- AXIOS -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+
 
     <!-- CÓDIGO JS/VUE-->
     <script>
@@ -125,16 +127,16 @@
                 c_volver: 1,
                 c_footer: 0,
                 tipo_usuario:"admin",
-                Titulo_Principal: "Buscar profesor",
+                Titulo_Principal: "Buscar administrador",
                 allData: '',
                 searchval: '',
-                vista: 'info_prof'
+                vista: 'info_admin'
             },
             methods: {
               CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../src/ad_buscar_admins.php',
+                       url: '../../../src/ad_buscar_admins.php',
                        action: 'fetchall',
                        data: {
                            vista: this.vista
@@ -146,7 +148,7 @@
                Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../src/ad_buscar_admins_filtro.php',
+                       url: '../../../src/ad_buscar_admins_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
@@ -159,12 +161,12 @@
                 EditarPersona:function(event)
                 {
                   alert("Persona: " + event);
-                  //window.location.href = "ad_cambios_maestro.html" 
+                  //window.location.href = "ad_cambios_admin.html" 
                 },
               CerrarSesion: function (event) {
-                    window.location.href = "../index.html"
+                    window.location.href = "../../index.html"
                 },
-                Volver: function (event) {
+              Volver: function (event) {
                     window.location.href = "ad_avisos.html"
                 },
               SelAlumnos:function(event)
@@ -177,11 +179,15 @@
                 },
               DarAlta:function(event)
                 {
-                  window.location.href = "ad_alta_maestro.html" 
+                  window.location.href = "ad_alta_admin.html" 
                 },
-              Maestro1:function(event)
+              SelProfesores:function(event)
                 {
-                  window.location.href = "ad_cambios_maestro.html" 
+                  window.location.href = "ad_seleccionar_maestro.html" 
+                },
+              Admin1:function(event)
+                {
+                  window.location.href = "ad_cambios_admin.html" 
                 },
             },
             created: function(){

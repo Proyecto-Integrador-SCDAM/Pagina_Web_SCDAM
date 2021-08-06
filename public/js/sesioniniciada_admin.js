@@ -6,14 +6,14 @@ var vmRedLogin = new Vue ({
     methods:{        
 
         Redireccion: function (event) {
-            window.location.href = 'http://scdam.web/index.html'
+            window.location.href = 'http://scdam.web/public/index.html'
         },
     },
     created(){
         //CARGA VARIABLE GLOBAL
         let data = localStorage.getItem("idcon");
         let data2 = localStorage.getItem("rol");
-        if (data == "0" || data2 != 'Alumno') {
+        if (data == "0" || data2 != 'Admin') {
             this.Redireccion();
         }
     },
