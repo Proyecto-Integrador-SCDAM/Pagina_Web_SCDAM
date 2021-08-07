@@ -136,7 +136,7 @@
               CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../../src/ad_buscar_admins.php',
+                       url: '../../php/ad_buscar_admins.php',
                        action: 'fetchall',
                        data: {
                            vista: this.vista
@@ -148,7 +148,7 @@
                Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../../../src/ad_buscar_admins_filtro.php',
+                       url: '../../php/ad_buscar_admins_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
@@ -167,7 +167,7 @@
                     window.location.href = "../../index.html"
                 },
               Volver: function (event) {
-                    window.location.href = "ad_avisos.html"
+                    window.location.href = "ad_avisos.php"
                 },
               SelAlumnos:function(event)
                 {

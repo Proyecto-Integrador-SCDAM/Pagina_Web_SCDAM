@@ -38,6 +38,11 @@
             "Con_usuario" => $Aux,
             "Con_id" => $id
         ];
+
+        //GLOBALES
+        $auth=new Auth();
+        $auth->setUser($RespuestaCon);
+
         echo json_encode($RespuestaCon);
    
     } catch (Exception $e) {

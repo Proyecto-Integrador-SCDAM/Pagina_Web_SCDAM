@@ -167,7 +167,7 @@
               CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../../src/ma_buscar_alumnos.php',
+                       url: '../../php/ma_buscar_alumnos.php',
                        action: 'fetchall',
                        data: {
                            filtro: this.filtro,
@@ -181,7 +181,7 @@
                Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../../../src/ma_buscar_alumnos_filtro.php',
+                       url: '../../php/ma_buscar_alumnos_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
@@ -210,7 +210,7 @@
                     window.location.href = "../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "ma_avisos.html"
+                    window.location.href = "ma_avisos.php"
                 },
             },
             created: function(){

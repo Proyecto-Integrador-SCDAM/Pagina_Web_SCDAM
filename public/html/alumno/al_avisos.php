@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaralumno.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -130,7 +136,7 @@
     </div>
 
     <!-- VERIFICAR ÚLTIMO INGRESO-->
-    <script src="../../js/sesioniniciada_alumno.js"></script>
+    <!-- <script src="../../js/sesioniniciada_alumno.js"></script> -->
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -147,13 +153,13 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php";
                 },
                 InfoAlu: function (event) {
-                    window.location.href = "al_info.html"
+                    window.location.href = "al_info.html";
                 },
                 Contacto: function (event) {
-                    window.location.href = "al_contacto.html"
+                    window.location.href = "al_contacto.html";
                 },
             },
             computed: {

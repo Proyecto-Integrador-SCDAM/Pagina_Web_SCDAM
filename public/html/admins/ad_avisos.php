@@ -1,5 +1,11 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"> 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -129,7 +135,7 @@
         </div>        
     </div>
     <!-- VERIFICAR ÚLTIMO INGRESO-->
-    <script src="../../js/sesioniniciada_admin.js"></script>
+    <!-- <script src="../../js/sesioniniciada_admin.js"></script> -->
     <!-- CÓDIGO JS/VUE-->
     <script>
         //MENSAJE
@@ -145,7 +151,7 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 EySadmin: function (event) {
                     window.location.href = "ad_editar_grupos.html"

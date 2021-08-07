@@ -67,7 +67,7 @@
                             <div class="cent">
                                 <h6><b>Acceso:</b> {{ResultadoConsulta["PERMISO"]}}</h6>
                             </div> 
-                            <div class="cent">
+                            <div class="cent" v-if="ResultadoConsulta['CAUSA'] != ''">
                                 <h6><b>Causa de denegación:</b> {{ResultadoConsulta["CAUSA"]}}</h6>
                             </div> 
                         </div>
@@ -103,7 +103,7 @@
                     window.location.href = "../../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "al_avisos.html"
+                    window.location.href = "al_avisos.php"
                 },
                 Contacto: function (event) {
                     window.location.href = "al_contacto.html"
@@ -111,7 +111,7 @@
                 infAl: function(event){
                     axios({
                        method: 'POST',
-                       url: '../../../src/al_filtro_informacion.php',
+                       url: '../../php/al_filtro_informacion.php',
                        data: {
                            correocon: this.correocon
                         }

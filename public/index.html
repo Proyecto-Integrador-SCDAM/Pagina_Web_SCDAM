@@ -115,13 +115,13 @@
                    localStorage.setItem("rol", this.TipoUsuario);
                    switch (this.TipoUsuario) {
                        case 'Admin':
-                       window.location.href = 'html/admins/ad_avisos.html'
+                       window.location.href = 'html/admins/ad_avisos.php'
                            break;
                        case 'Maestro':
-                       window.location.href = 'html/profe/ma_avisos.html'
+                       window.location.href = 'html/profe/ma_avisos.php'
                            break;
                        case 'Alumno':
-                       window.location.href = 'html/alumno/al_avisos.html'
+                       window.location.href = 'html/alumno/al_avisos.php'
                            break;
                        case 'No registrado':
                            alert("Correo o contraseña incorrecto");

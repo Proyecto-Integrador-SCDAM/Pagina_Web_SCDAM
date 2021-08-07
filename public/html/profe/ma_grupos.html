@@ -128,12 +128,12 @@
                     window.location.href = "../../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "ma_avisos.html"
+                    window.location.href = "ma_avisos.php"
                 },
                 CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../../src/ma_editar_grupos.php',
+                       url: '../../php/ma_editar_grupos.php',
                        action: 'fetchall',
                        data: {
                         idcon: this.idcon,
@@ -145,7 +145,7 @@
                CargarTabla2: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../../src/ad_editar_grupos_lista.php',
+                       url: '../../php/ad_editar_grupos_lista.php',
                        action: 'fetchall',
                        data: {
                       }

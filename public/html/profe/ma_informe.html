@@ -122,12 +122,12 @@
                     window.location.href = "../../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "ma_avisos.html"
+                    window.location.href = "ma_avisos.php"
                 },
                 CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../../src/ma_registro.php',
+                       url: '../../php/ma_registro.php',
                        action: 'fetchall',
                        data: {
                         idcon: this.idcon
@@ -139,7 +139,7 @@
                 Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../../../src/ma_registro_filtro.php',
+                       url: '../../php/ma_registro_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
