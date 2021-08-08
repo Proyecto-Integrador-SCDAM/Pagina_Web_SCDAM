@@ -26,7 +26,7 @@
         
         
     
-    
+        //VERIFICAR LOGIN ALUMNO
         public function VerificarAlumno($persona_alu){
             
             $stmt = self::$pdo->prepare("select *  from $this->table  where  persona_alu=:persona_alu");
@@ -40,6 +40,17 @@
                 return 0;
             }
         }
+
+        //ELIMINAR GRUPO (Mover a grupo "Sin grupo")
+        public function EliminarGrupo($grupo_alu){
+            
+            $stmt = self::$pdo->prepare("update $this->table SET grupo_alu = (SELECT grupos.id_grup FROM grupos WHERE grupos.periodo='Sin grupo')  where  grupo_alu=:grupo_alu");
+            $stmt->bindParam(":grupo_alu",$grupo_alu);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+        }
+
         
         
     }
