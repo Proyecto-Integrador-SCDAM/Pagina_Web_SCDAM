@@ -8,7 +8,7 @@ $recibirjson = json_decode(file_get_contents('php://input'), true);
 //CONSULTAS
 //CONSULTAR GRUPOS
 try {
-    $stmt = $pdo->query('SELECT * FROM grupos');
+    $stmt = $pdo->query('SELECT * FROM grupos order by grado ASC');
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
     $cuenta = $stmt->rowCount(); //CONTAR FILAS

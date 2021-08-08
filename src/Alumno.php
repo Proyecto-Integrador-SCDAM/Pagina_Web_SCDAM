@@ -48,9 +48,16 @@
             $stmt->bindParam(":grupo_alu",$grupo_alu);
             $stmt->execute();
             $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
         }
 
+        //MOVER DE GRUPO
+        public function MoverAlumno($matricula ,$grupo_alu){
+            
+            $stmt = self::$pdo->prepare("update $this->table SET grupo_alu=:grupo_alu  where  matricula=:matricula");
+            $stmt->bindParam(":grupo_alu",$grupo_alu);
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->execute();
+        }
         
         
     }
