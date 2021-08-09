@@ -1,17 +1,17 @@
 {
     "name": "scdam/proyecto",
-    "description": "Página Web integradora\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[a\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+    "description": "Pagina geb integradora",
     "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "proyecto\\": "src/"
+            "Scdam\\Proyecto\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "Carlos Lopez",
-            "email": "201770032@uttcampus.edu.mx"
+            "name": "20170068",
+            "email": "84062154+20170068@users.noreply.github.com"
         }
     ],
     "require": {}
