@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>registro Alumnos</title>
     <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
@@ -58,10 +57,7 @@
 
     </style>
 </head>
-<body>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+<body>  
     <!--HABILITAR TOOLTIPS-->
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -106,118 +102,112 @@
                         <h2 class="letra">INFORMACIÓN PERSONAL<span class="badge bg-secondary"></span></h2>
                     </div>
                     <div class="row g-3">
-                        <div class="col">
-                            <h4>Nombre<span class="badge bg-secondary"></span></h4>
-                          <input type="text" class="form-control" placeholder="Nombre(s)" aria-label="First name">
-                        </div>
-                        <div class="col">
-                            <h4>Apellido Paterno<span class="badge bg-secondary"></span></h4>
-                            <input type="text" class="form-control" placeholder="Apellido Paterno" aria-label="Last name">
-                        </div>
-                        <div class="col">
-                            <h4>Apellido Materno<span class="badge bg-secondary"></span></h4>
-                            <input type="text" class="form-control" placeholder="Apellido Materno" aria-label="Last name">
-                          </div>
-                    </div>
-                    <div>
-                        <div class="row g-3">
-                          <div class="col">
-                          <h4>Fecha de Nacimiento<span class="badge bg-secondary"></span></h4>
-                          <input type="date" class="form-control" placeholder="Fecha de Nacimiento" aria-label="Last name">
-                        </div>
-                        <div class="col">
-                          <h4>Telefono<span class="badge bg-secondary"></span></h4>
-                          <input type="text" class="form-control" placeholder="Telefono" aria-label="Last name">
-                        </div>
-                        <span class="radio">
-                          <h4>Género<span class="badge bg-secondary"></span></h4>
-                          <label>
-                            <input type="radio" class="radiobox" name="style-0a2">
-                            <span>Mujer</span> 
-                          </label>
-                          <label>
-                            <input type="radio" class="radiobox" name="style-0a2">
-                            <span>Hombre</span> 
-                          </label>
-                          <label>
-                              <input type="radio" class="radiobox" name="style-0a2">
-                              <span>Indefinido</span> 
-                            </label>
-                        </span>
+                      <div class="col">
+                          <h4>Nombre<span class="badge bg-secondary"></span></h4>
+                        <input v-model="dNombre" type="text" class="form-control" placeholder="Nombre(s)" aria-label="First name">
                       </div>
+                      <div class="col">
+                          <h4>Apellido Paterno<span class="badge bg-secondary"></span></h4>
+                          <input v-model="dAp" type="text" class="form-control" placeholder="Apellido Paterno" aria-label="Last name">
+                      </div>
+                      <div class="col">
+                          <h4>Apellido Materno<span class="badge bg-secondary"></span></h4>
+                          <input v-model="dAm" type="text" class="form-control" placeholder="Apellido Materno" aria-label="Last name">
+                      </div>
+                    </div>
+                    <div class="row g-3">
+                      <div class="col">
+                        <h4>Fecha de Nacimiento<span class="badge bg-secondary"></span></h4>
+                        <input v-model="dFecha" type="date" class="form-control" placeholder="Fecha de Nacimiento" aria-label="Last name">
+                      </div>
+                      <div class="col">
+                        <h4>Teléfono<span class="badge bg-secondary"></span></h4>
+                        <input v-model="dTel" type="text" class="form-control" placeholder="Telefono" aria-label="Last name">
+                      </div>
+                      <span class="radio">
+                        <h4>Género<span class="badge bg-secondary"></span></h4>
+
+                        <label>
+                            <input value="f" v-model="dGenero" type="radio" class="radiobox" name="style-0a2" checked>
+                            <span>Mujer</span> 
+                        </label>
+
+                        <label>
+                          <input input value="m" v-model="dGenero" type="radio" class="radiobox" name="style-0a2">
+                          <span>Hombre</span> 
+                        </label>
+                        
+                        <label>
+                          <input input value="i" v-model="dGenero" type="radio" class="radiobox" name="style-0a2">
+                          <span>Indefinido</span> 
+                        </label>
+                      </span>
                     </div>
                     <br>
+
                     <div class="color">
-                        <h2 class="letra">DATOS DE LA CUENTA<span class="badge bg-secondary"></span></h2>
+                      <h2 class="letra">DATOS DE LA CUENTA<span class="badge bg-secondary"></span></h2>
+                    </div>
+
+                    <div class="row g-3">
+                      <div class="col">
+                        <h4>Correo<span class="badge bg-secondary"></span></h4>
+                        <input v-model="dCorreo" type="email" class="form-control" placeholder="Correo" aria-label="Last name">
                       </div>
-                      <div class="row g-3">
-                        <div class="col">
-                            <h4>Correo<span class="badge bg-secondary"></span></h4>
-                          <input type="email" class="form-control" placeholder="Correo" aria-label="Last name">
+                      <div class="col">
+                        <h4>Contraseña<span class="badge bg-secondary"></span></h4>
+                        <input v-model="dContra" type="password" class="form-control" placeholder="Contraseña" aria-label="Last name">
+                      </div>
+                      <div class="row g-3 centro">
+                        <div class="col-md-3">
+                          <h4>Codigo NFC<span class="badge bg-secondary"></span></h4>
+                          <input v-model="dNFC" type="text" class="form-control centro" placeholder="NFC" aria-label="Last name">
                         </div>
-                        <div class="col">
-                            <h4>Contraseña<span class="badge bg-secondary"></span></h4>
-                            <input type="password" class="form-control" placeholder="Contraseña" aria-label="Last name">
-                        </div>
-                        <div class="row g-3">
-                          <div class="col-md-3">
-                            <h4>Codigo NFC<span class="badge bg-secondary"></span></h4>
-                            <input type="text" class="form-control centro" placeholder="NFC" aria-label="Last name">
-                          </div>
+
                           <div class="col-md-4 ">
                             <div class="form-check form-switch">
                               <div>
                                 <label class="form-check-label cam" for="flexSwitchCheckChecked"><h4>Permitir Acceso</h4></label>
                               </div>
                               <div class="Centrar cam ">
-                              <input style="width: 5vw; height: 2vw;" class="form-check-input izq" type="checkbox" id="flexSwitchCheckChecked" >
+                              <input v-model="dPermiso" style="width: 5vw; height: 2vw;" class="form-check-input izq" type="checkbox" id="flexSwitchCheckChecked" >
                             </div>
                             </div>
                           </div>
                           <div class="col-md-5">
                             <h4>Causa denegacion<span class="badge bg-secondary"></span></h4>
-                            <input type="text" class="form-control" placeholder="Motivo" aria-label="Last name">
+                            <input v-model="dCausa" type="text" class="form-control" placeholder="Motivo" aria-label="Last name">
                           </div>
                         </div>
                         </div>
                         <br>
                         <h2 class="letra color">DATOS ACADEMICOS <span class="badge bg-secondary" ></span></h2> 
-                        <div class="col">
-                            <h4>Matricula<span class="badge bg-secondary"></span></h4>
-                            <div class="centro">
-                            <div class="col-md-2 "> 
-                                <input type="text" class="form-control centro" placeholder="Matricula" aria-label="Last name">
-                            </div>
-                            </div>
-                        </div>
+                        
                         <div class="flex-container">
                         <div class="col-md-4">
                             <h4>Grupo<span class="badge bg-secondary"></span></h4>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Sin grupo</option>
-                                    <option value="1">1A</option>
-                                    <option value="2">2B</option>
-                                    <option value="3">3C</option>
+                                <select v-model="dGrupo" class="form-select" aria-label="Default select example">
+                                    <option v-for="row1 in allData" selected>{{row1.grado}}{{row1.seccion}} {{row1.turno}} {{row1.periodo}}</option>
                                 </select>
                         </div>
                         <div class="col-md-4">
                             <h4>Especialidad<span class="badge bg-secondary"></span></h4>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Seleccione una opcion</option>
-                                    <option value="1">Administración</option>
-                                    <option value="2">Contabilidad</option>
-                                    <option value="3">Electrónica</option>
-                                    <option value="4">Enfermería</option>
-                                    <option value="5">Máquinas y herramientas</option>
-                                    <option value="6">Mecánica</option>
-                                    <option value="7">Programación</option>
-                                    <option value="8">Química industrial</option>
-                                    <option value="9">Ventas</option>
+                                <select v-model="dEspecialidad" class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione una opción</option>
+                                    <option value="Administración">Administración</option>
+                                    <option value="Contabilidad">Contabilidad</option>
+                                    <option value="Electrónica">Electrónica</option>
+                                    <option value="Enfermería">Enfermería</option>
+                                    <option value="Máquinas y herramientas">Máquinas y herramientas</option>
+                                    <option value="Mecánica">Mecánica</option>
+                                    <option value="Programación">Programación</option>
+                                    <option value="Química industrial">Química industrial</option>
+                                    <option value="Ventas">Ventas</option>
                                 </select>
                             </div>
                         </div>
                         <div class="cen"> 
-                            <button type="button" class="btn btn-success col-md-2" v-on:click="Regis">Dar de alta</button>
+                            <button type="button" class="btn btn-success col-md-2" v-on:click="VerificarUnicos">Dar de alta</button>
                         </div>
                         <br>
                         <br>
@@ -225,31 +215,15 @@
                         <br>
                   </form>
             </div>
-            <!-- FOOTER -->
-            <div v-if="(tipo_usuario == 'admin' || tipo_usuario == 'maestro') && c_footer" class="Footer-grid-container">
-
-                <div class="Footer-grid-item-izq footer-hvr" id="azul2">
-                    <div class="Centrar">
-                        <h2> Opción 1 </h2>
-                    </div>
-                </div>
-
-                <div class="Footer-grid-item-cen footer-hvr" id="azul2">
-                    <div class="Centrar">
-                        <h2> Opción 2 </h2>
-                    </div>
-                </div>
-
-                <div class="Footer-grid-item-der footer-hvr" id="azul2">
-                    <div class="Centrar"> 
-                        <h2> Opción 3 </h2>
-                    </div>
-                </div>
-
-            </div>
         </div>        
     </div>
     
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- CÓDIGO JS/VUE-->
     <script>
@@ -260,7 +234,22 @@
                 c_volver: 1,
                 c_footer: 0,
                 tipo_usuario:"admin",
-                Titulo_Principal: "Registrar Alumnos"
+                Titulo_Principal: "Registrar Alumnos",
+                dNombre: "",
+                dAp: "",
+                dAm: "",
+                dFecha: "",
+                dTel: "",
+                dGenero: "f",
+                dCorreo: "",
+                dContra: "",
+                dNFC: "",
+                dPermiso: "true",
+                dCausa: "",
+                dGrupo: "Sin grupo",
+                dEspecialidad: "Seleccione una opción",
+                msgUnico: "",
+                allData: ''
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -270,18 +259,41 @@
                     window.location.href = "ad_avisos.php"
                 },
                 Regis:function(event){
-                //Ingresamos un mensaje
-                var mensaje = confirm("Esta seguro que quiere dar de alta a esta persona?");
-                //Verificamos si el usuario acepto el mensaje
-                if (mensaje) {
-                alert("Se dio de alta exitosamente");
-                }
+                    alert(this.dGrupo);
+                },
+                SinGuardar:function(event){
+                    var mensaje = confirm("Desea salir sin guardar cambios?");
+                },
+                CargarTabla: function (event) {
+                   axios({
+                       method: 'POST',
+                       url: '../../php/ad_editar_grupos.php',
+                       action: 'fetchall',
+                       data: {
+                      }
+                   }) .then((response) => {
+                    this.allData = response.data;
+                   })
+                },
+                VerificarUnicos:function(){
+                    var params = new URLSearchParams();
+                    params.append('dGrupo', this.dGrupo);
+
+                    axios.post('../../controller_alta_alumno.php', params)
+
+                    .then((response) => {
+                        console.log(response);
+                        this.ResultadoConsulta=response.data;
+                        this.msgUnico = this.ResultadoConsulta["msg"];
+                        alert(this.msgUnico);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                },
             },
-            SinGuardar:function(event){
-                //Ingresamos un mensaje
-                var mensaje = confirm("Desea salir sin guardar cambios?");
-                }
-            
+            created: function(){
+              this.CargarTabla();
             },
             computed: {
 

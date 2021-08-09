@@ -36,6 +36,12 @@
                 return 0;
             }
         }
+
+        public function AltaAdmin($id){
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table (persona_ad) VALUES (:id)");
+            $stmt->bindParam(":id",$id);
+            $stmt->execute();
+        }
         
         
     }

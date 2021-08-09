@@ -222,18 +222,24 @@
                    })
                },
                BorrarGrupo:function(event){
-                    var params = new URLSearchParams();
-                    params.append('id_grup', event);
-                    axios.post('../../controller_borrar_grupo.php', params)
 
-                    .then((response) => {
-                        console.log(response);
-                        this.CargarTabla();
-                        this.CargarTabla2();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    var mensaje = confirm("¿Desea borrar este grupo?");
+                    if (mensaje) {
+                        var params = new URLSearchParams();
+                        params.append('id_grup', event);
+                        axios.post('../../controller_borrar_grupo.php', params)
+
+                        .then((response) => {
+                            console.log(response);
+                            this.CargarTabla();
+                            this.CargarTabla2();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
+
+                    
                 },
                 MoverGrupo:function(event){
                     this.VerMoverGrupos = true;
@@ -260,7 +266,7 @@
                         .catch(function (error) {
                             console.log(error);
                         });
-                        }
+                    }
                 }
             },
             created: function(){
