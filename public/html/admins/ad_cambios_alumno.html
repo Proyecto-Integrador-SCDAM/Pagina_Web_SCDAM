@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambios/Eliminaciones alumnos</title>
+    <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #etiqu{
+            font-size: 24px;
+        }
+        .elz{
+            position: absolute;z-index: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!--HABILITAR TOOLTIPS-->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <!-- VUE -->
+    <div id="app">
+        <div id="contenedor2">
+        <div class="grid-container" id="fixed">
+            <!-- Barra superior -->
+            <div class="grid-itemHeader" id="azul1">  
+                <div class="Banner-grid-container">
+
+                    <div class="Banner-grid-item-izq" id="azul2" v-on:click="Volver">
+                        <div class="Centrar">
+                            <img v-if="c_volver == 1" src="../../imagenes/volver-flecha.png" height="50%" width="30%">
+                        </div>
+                    </div>
+
+                    <div class="Banner-grid-item-cen" id="blanco1">
+                        <div class="Centrar">
+                            <h1> {{ Titulo_Principal }} </h1>
+                        </div>
+                    </div>
+
+                    <div class="Banner-grid-item-der cerrarses" id="azul2" v-on:click="CerrarSesion">
+                        <div class="Centrar"> 
+                            <img src="../../imagenes/apagar.png" height="50%" width="30%">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTENIDO (Página) -->
+            <div class="grid-itemContenido">
+                <p> editando a: {{ idper }} </p>
+                  <!-- OPERACIONES FOOTER --> <form method="POST">
+                      <div class="row g-3">
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Nombre" required value="jorge">
+                </div> 
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Apellido Paterno</label>
+                    <input type="text" class="form-control"  placeholder="Apellido Paterno" required value="montoya">
+                </div>
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Apellido Materno</label>
+                    <input type="text" class="form-control"  placeholder="Aapellido Materno" required value="salas">
+                </div>
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Fecha Nacimiento</label>
+                    <input type="date" class="form-control"  placeholder="Fecha de Nacimiento" required value="04/06/2003">
+                </div>
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Telefono</label>
+                    <input type="text" class="form-control"  placeholder="telefono" required value="872680099">
+                </div>
+                <div class="row g-3">
+                <div class="txt_field col-md-3">
+                    <label id="etiqu">Correo Electronico</label>
+                    <input type="email" class="form-control"  placeholder="correo" required value="monty@gmail.com">
+                </div>
+                <div class="txt_field col-md-3">
+                    <label id="etiqu">Contraseña</label>
+                    <input type="password" class="form-control"  placeholder="contraseña" required value="******">
+                </div>
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Matricula</label>
+                    <input type="text" class="form-control"  placeholder="Matricula" required value="27890458">
+                </div>
+                <div class="txt_field col-md-2">
+                    <label id="etiqu">Codigo NFC</label>
+                    <input type="text" class="form-control"  placeholder="NFC" required value="864689787897">
+                </div>
+                </div>
+                      </div>
+                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                           <label id="etiqu" class="form-check-label" for="inlineRadio1">Hombre</label>
+                                </div>
+                     <div class="form-check form-check-inline">
+                       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                       <label id="etiqu" class="form-check-label" for="inlineRadio2">mujer</label>
+                      </div><div class="row g-3">
+                <select class="col-md-4" aria-label="Default select example">
+                     <option selected>seleccionar grupo</option>
+                     <option value="1">1-a</option>
+                     <option value="2">1-b</option>
+                     <option value="3">T1-c</option>
+                </select>
+                <select class="col-md-4" aria-label="Default select example">
+                     <option selected>seleccionar especialidad</option>
+                     <option value="1">electricdidad</option>
+                     <option value="2">periodismo</option>
+                     <option value="3">economia/finanzas</option>
+                </select>
+                <div class="col-md-2"></div>
+                <div class="form-check form-switch col-md-2">
+                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                 <label class="form-check-label" for="flexSwitchCheckDefault">Permisos</label>
+               </div>
+                      </div>
+                <div class="d-grid gap-2">
+                <br>
+<!-- Modal -->
+<div class="modal fade elz" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       esta seguro?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">obvio</button>
+      </div>
+    </div>
+  </div>
+</div>
+                <div class="row g-3">
+                     <br>
+                    <div class="centrado">
+                        <input type="submit" class="btn btn-warning" value="Cambiar">        
+                     </div>
+                     <br>
+                     <br>
+                     <br>
+                     <br>
+                     <br>
+                <!-- Button trigger modal -->
+                <div class="col-md-1">
+                <button type="button" class="btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  eliminar
+</button></div></div>
+                  </form>
+
+            </div>
+            <!-- FOOTER -->
+            <div v-if="(tipo_usuario == 'admin' || tipo_usuario == 'maestro') && c_footer" class="Footer-grid-container">
+
+                <div class="Footer-grid-item-izq footer-hvr" id="azul2">
+                    <div class="Centrar">
+                        <h2> Opción 1 </h2>
+                    </div>
+                </div>
+
+                <div class="Footer-grid-item-cen footer-hvr" id="azul2">
+                    <div class="Centrar">
+                        <h2> Opción 2 </h2>
+                    </div>
+                </div>
+
+                <div class="Footer-grid-item-der footer-hvr" id="azul2">
+                    <div class="Centrar"> 
+                        <h2> Opción 3 </h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>        
+    </div>
+    </div>
+
+    <!-- CÓDIGO JS/VUE-->
+    <script>
+        //MENSAJE
+        var vm = new Vue ({
+            el: "#app", //Elemento
+            data: { 
+                c_volver: 1,
+                c_footer: 0,
+                idper: "",
+                tipo_usuario:"admin",
+                Titulo_Principal: "Cambio/Eliminacion de Alumnos"
+            },
+            methods: {
+                CerrarSesion: function (event) {
+                    window.location.href = "../index.html"
+                },
+                Volver: function (event) {
+                    window.location.href = "ad_avisos.php"
+                },
+            },
+            created(){
+               //CARGA VARIABLE GLOBAL
+               let data = localStorage.getItem("editarper");
+               if (data != null) {
+                   this.idper = data;
+               }
+           },
+            computed: {
+
+            }
+        });
+    </script>
+</body>
+</html>
