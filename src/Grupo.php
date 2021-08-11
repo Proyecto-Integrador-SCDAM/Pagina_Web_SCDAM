@@ -66,4 +66,14 @@
             }
             return $Aux;
         }
+
+        public function NuevoGrupo($grado, $seccion, $turno, $periodo){
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table(grado, seccion, turno, periodo) 
+            VALUES (:grado, :seccion, :turno, :periodo)");
+            $stmt->bindParam(":grado",$grado);
+            $stmt->bindParam(":seccion",$seccion);
+            $stmt->bindParam(":turno",$turno);
+            $stmt->bindParam(":periodo",$periodo);
+            $stmt->execute();
+        }
     }
