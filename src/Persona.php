@@ -60,10 +60,10 @@
             }
         }
 
-        public function AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC){
-            
+        public function AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC, $permiso, $causa_denegada){
+            $permiso = (int)$permiso;
             $stmt = self::$pdo->prepare("INSERT INTO $this->table (nombre, apellido_paterno, apellido_materno, genero, telefono, correo, fecha_nacimiento, u_password, NFC, permiso, causa_denegada)
-            VALUES (:nombre, :apellido_paterno, :apellido_materno, :genero, :telefono, :correo, :fecha_nacimiento, :u_password, :NFC, '1', '')");
+            VALUES (:nombre, :apellido_paterno, :apellido_materno, :genero, :telefono, :correo, :fecha_nacimiento, :u_password, :NFC, :permiso, :causa_denegada)");
             $stmt->bindParam(":nombre",$nombre);
             $stmt->bindParam(":apellido_paterno",$apellido_paterno);
             $stmt->bindParam(":apellido_materno",$apellido_materno);
@@ -73,6 +73,10 @@
             $stmt->bindParam(":fecha_nacimiento",$fecha_nacimiento);
             $stmt->bindParam(":u_password",$u_password);
             $stmt->bindParam(":NFC",$NFC);
+            $stmt->bindParam(":permiso",$permiso, PDO::PARAM_INT);
+            $stmt->bindParam(":causa_denegada",$causa_denegada);
+            
+
             $stmt->execute();
         }
         

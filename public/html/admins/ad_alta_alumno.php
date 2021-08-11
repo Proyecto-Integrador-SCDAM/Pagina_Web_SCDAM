@@ -170,13 +170,13 @@
                                 <label class="form-check-label cam" for="flexSwitchCheckChecked"><h4>Permitir Acceso</h4></label>
                               </div>
                               <div class="Centrar cam ">
-                              <input v-model="dPermiso" style="width: 5vw; height: 2vw;" class="form-check-input izq" type="checkbox" id="flexSwitchCheckChecked" >
+                              <input v-model="permisobool" style="width: 5vw; height: 2vw;" class="form-check-input izq" type="checkbox" id="flexSwitchCheckChecked" >
                             </div>
                             </div>
                           </div>
                           <div class="col-md-5">
-                            <h4>Causa denegacion<span class="badge bg-secondary"></span></h4>
-                            <input v-model="dCausa" type="text" class="form-control" placeholder="Motivo" aria-label="Last name">
+                            <h4>Causa denegación<span class="badge bg-secondary"></span></h4>
+                            <input :disabled="permisobool ? '' : disabled" v-model="dCausa" type="text" class="form-control" placeholder="Motivo" aria-label="Last name">
                           </div>
                         </div>
                         </div>
@@ -207,7 +207,7 @@
                             </div>
                         </div>
                         <div class="cen"> 
-                            <button type="button" class="btn btn-success col-md-2" v-on:click="VerificarUnicos">Dar de alta</button>
+                            <button type="button" class="btn btn-success col-md-2" v-on:click="ArreglarVariables">Dar de alta</button>
                         </div>
                         <br>
                         <br>
@@ -244,25 +244,20 @@
                 dCorreo: "",
                 dContra: "",
                 dNFC: "",
-                dPermiso: "true",
+                dPermiso: 1,
                 dCausa: "",
                 dGrupo: "Sin grupo",
                 dEspecialidad: "Seleccione una opción",
                 msgUnico: "",
-                allData: ''
+                allData: '',
+                permisobool: true,
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../index.html"
+                    window.location.href = "../../index.html"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_avisos.php"
-                },
-                Regis:function(event){
-                    alert(this.dGrupo);
-                },
-                SinGuardar:function(event){
-                    var mensaje = confirm("Desea salir sin guardar cambios?");
+                    window.location.href = "ad_seleccionar.html"
                 },
                 CargarTabla: function (event) {
                    axios({
@@ -275,17 +270,69 @@
                     this.allData = response.data;
                    })
                 },
+                ArreglarVariables:function(event){
+                    if (this.permisobool){
+                        this.dPermiso = 1;
+                    }else{
+                        this.dPermiso = 0;
+                    }
+                    this.dCorreo = this.dCorreo.toLowerCase();
+                    //alert(this.dPermiso)
+                    this.VerificarUnicos();
+
+                },
+                GuadarAlta:function(){
+                    if (this.dNombre != "" && this.dAp != ""&& this.dAm != "" && this.dFecha != "" && this.dCorreo != "" && this.dContra != ""){
+                        if (this.dTel.length == 10 || this.dTel.length == "") {
+                            var params = new URLSearchParams();
+                            params.append('nombre', this.dNombre);
+                            params.append('apellido_paterno', this.dAp);
+                            params.append('apellido_materno', this.dAm);
+                            params.append('genero', this.dGenero);
+                            params.append('telefono', this.dTel);
+                            params.append('correo', this.dCorreo);
+                            params.append('fecha_nacimiento', this.dFecha);
+                            params.append('u_password', this.dContra);
+                            params.append('NFC', this.dNFC);
+                            params.append('permiso', this.dPermiso);
+                            params.append('causa_denegada', this.dCausa);
+                            params.append('id_grup', this.dGrupo);
+                            params.append('especialidad', this.dEspecialidad);
+
+
+                            axios.post('../../controller_alta_alumno.php', params)
+
+                            .then((response) => {
+                                console.log(response);
+                                alert("Alumno dado de alta correctamente");
+                                window.location.href = "ad_seleccionar.html"
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                        } else {
+                            alert("Teléfono no válido");
+                        }
+                    } else {
+                        alert("Favor de llenar todos los campos obligatorios");
+                    }
+                },
                 VerificarUnicos:function(){
                     var params = new URLSearchParams();
-                    params.append('dGrupo', this.dGrupo);
+                    params.append('dCorreo', this.dCorreo);
+                    params.append('dNFC', this.dNFC);
 
-                    axios.post('../../controller_alta_alumno.php', params)
+                    axios.post('../../controller_verificar_unicos.php', params)
 
                     .then((response) => {
                         console.log(response);
                         this.ResultadoConsulta=response.data;
                         this.msgUnico = this.ResultadoConsulta["msg"];
-                        alert(this.msgUnico);
+                        if (this.msgUnico != "0"){
+                            alert("El " + this.msgUnico + " introducido no está disponible");
+                        }else{
+                            this.GuadarAlta();
+                        }
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -296,7 +343,6 @@
               this.CargarTabla();
             },
             computed: {
-
             }
         });
     </script>
