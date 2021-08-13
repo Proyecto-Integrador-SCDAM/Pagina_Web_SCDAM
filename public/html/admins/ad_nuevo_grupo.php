@@ -18,7 +18,7 @@
             <div class="grid-itemHeader" id="azul1">  
                 <div class="Banner-grid-container">
 
-                    <div class="Banner-grid-item-izq" id="azul2">
+                    <div class="Banner-grid-item-izq" id="azul2" v-on:click="Volver">
                         <div class="Centrar">
                             <img v-if="c_volver == 1" src="../../imagenes/volver-flecha.png" height="50%" width="30%">
                         </div>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="Banner-grid-item-der cerrarses" id="azul2">
+                    <div class="Banner-grid-item-der cerrarses" id="azul2" v-on:click="CerrarSesion">
                         <div class="Centrar"> 
                             <img src="../../imagenes/apagar.png" height="50%" width="30%">
                         </div>
@@ -138,6 +138,12 @@
                 Nano:"",
             },
             methods: {
+                CerrarSesion: function (event) {
+                    window.location.href = "../index.html"
+                },
+                Volver: function (event) {
+                    window.location.href = "ad_avisos.php"
+                },
                 Guardar:function(){
                     if(this.Ngrado !="" && this.Nseccion !="" && this.Nturno !="Selecciona una opción" && this.Nperiodo !="Selecciona una opción" && this.Naño !="" ){
                         var params = new URLSearchParams();
