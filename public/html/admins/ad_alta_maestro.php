@@ -192,16 +192,16 @@
                       <div class="CentrarH">
                           <h4>Grupos<span class="badge bg-secondary"></span></h4>
                             <ul class="list-group">
-                              <li v-for="row1 in allData" v-if="row1.periodo != 'Sin grupo'" class="list-group-item">
-                                <input v-model="checkedNames" class="form-check-input me-1" id="row1.seccion" value="row1.seccion" type="checkbox" aria-label="" >
-                                <label for="row1.seccion"> {{row1.grado}}{{row1.seccion}} {{row1.turno}} {{row1.periodo}} </label>
+                            <li v-for="(row1, key, index) in allData" :key="index" v-if="row1.periodo != 'Sin grupo'" class="list-group-item">
+                                <input v-model="checkedGrupo[key]" class="form-check-input me-1" :id="key" type="checkbox"  >
+                                <label :for="key"> {{row1.grado}}{{row1.seccion}} {{row1.turno}} {{row1.periodo}} </label>
                               </li>
                             </ul>
                       </div>    
                       <div>
                         <br>
                         <div class="cen"> 
-                          <button type="button" class="btn btn-success col-md-2" v-on:click="DemoVar">Dar de alta</button>
+                          <button type="button" class="btn btn-success col-md-2" v-on:click="VerificarUnicos">Dar de alta</button>
                         </div>
                         <br>
                         <br>
@@ -241,9 +241,10 @@
                 dCausa: "",
                 dGrupo: "",
                 msgUnico: "",
-                allData: '',
+                allData: {},
                 permisobool: true,
-                checkedGrupo: []
+                checkedGrupo: [],
+                cantGrupos: 0
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -253,12 +254,31 @@
                     window.location.href = "ad_seleccionar_maestro.html"
                 },
                 DemoVar: function (event) {
-                    alert(this.checkedGrupo);
+                    alert(this.checkedGrupo[1]);
+                },
+                AsignarGrupos:function(event){
+                    for (var i = 0; i < this.cantGrupos; i++) {
+                        if (this.checkedGrupo[i]){
+                            var params = new URLSearchParams();
+                            params.append('id_grup', this.allData[i]["id_grup"]);
+
+                            axios.post('../../controller_alta_grupo_maestro.php', params)
+
+                            .then((response) => {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                        }
+                    }
+                    alert("Profesor dado de alta correctamente");
+                    window.location.href = "ad_seleccionar_maestro.html"
                 },
                 CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../php/ad_editar_grupos.php',
+                       url: '../../controller_cargar_grupo.php',
                        action: 'fetchall',
                        data: {
                       }
@@ -289,7 +309,7 @@
                         if (this.msgUnico != "0"){
                             alert("El " + this.msgUnico + " introducido no está disponible");
                         }else{
-                            //this.GuadarAlta();
+                            this.GuadarAlta();
                         }
                     })
                     .catch(function (error) {
@@ -314,12 +334,15 @@
                             //params.append('id_grup', this.dGrupo);
 
 
-                            axios.post('../../controller_alta_alumno.php', params)
+                            axios.post('../../controller_alta_maestro.php', params)
 
                             .then((response) => {
                                 console.log(response);
-                                alert("Alumno dado de alta correctamente");
-                                window.location.href = "ad_seleccionar_maestro.html"
+                                //alert("Alumno dado de alta correctamente");
+                                //window.location.href = "ad_seleccionar_maestro.html"
+                                this.ResultadoConsulta=response.data;
+                                this.cantGrupos = this.ResultadoConsulta;
+                                this.AsignarGrupos();
                             })
                             .catch(function (error) {
                                 console.log(error);
