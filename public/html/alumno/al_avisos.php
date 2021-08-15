@@ -85,34 +85,35 @@
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
-                <div class="card mb-3">
+
+            <div class="card mb-3">
                     <div class="card-body">
-                      <h5 class="card-title">Avisos sobre Evaluacion</h5>
-                      <p class="card-text"><strong>Aqui se muestran las indicaciones a seguir</strong><br>Ejemplo: 
-                        Los alumnos tendran que hablar con sus maestros para checar la hora de presentar sus examenes.</p>
-                      <p class="card-text"><small class="text-muted">Publicado de 1 hora</small></p>
-                      <p class="card-text"><small class="text-muted">Publicado por Ana Lilia Herandez Viesca</small></p>
+                        <h5 class="card-title"><strong>Avisos Importantes</strong></h5>
                     </div>
-                    <img src="../../imagenes/examenes.jpg" class="imagen" >
+                    <br>
+                 <div class="" v-for="row in ResultadoConsulta">
+                   
+                    <h4>{{row.titulo}}</h4>
+                    <h6>{{row.cuerpo}}</h6>
+
+                    <br>
+
+                    <div class="card-footer text-muted">
+                        Publicado el {{row.fecha_hora}}
+                    </div>
+                    <div class="card-footer text-muted">
+                        Publicado por {{row.nombre}}
+                    </div>
                     
-                  </div>
-                  <div class="card text-center">
-                    <div class="card-header">
-                        <strong>Avisos sobre Finanzas</strong>
+                    <br> <br> 
+
                     </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Favor de tener informacion sobre sus pagos</h5>
-                      <p class="card-text">En caso de no saberlo, favor de comunicarse al siguiente correo <br>
-                        <strong>finanzas@gmail.com</strong> <br>
-                    con la Licenciada Alicia</p>
+                    <div class="card text-center">
+                        <div class="card-header"><strong></strong>
                     </div>
-                    <div class="card-footer text-muted">
-                      Publicado hace 3 dias
-                    </div>
-                    <div class="card-footer text-muted">
-                        Publicado por la Lic. Alicia
-                    </div>
-                  </div>
+                    
+                 </div>
+                </div>
             
 
             </div>
@@ -136,6 +137,10 @@
     </div>
 
     <!-- VERIFICAR ÚLTIMO INGRESO-->
+    
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- <script src="../../js/sesioniniciada_alumno.js"></script> -->
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -149,7 +154,8 @@
                 c_volver: 0,
                 c_footer: 1,
                 tipo_usuario:"alumno",
-                Titulo_Principal: "Avisos"
+                Titulo_Principal: "Avisos",
+                ResultadoConsulta:[]
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -161,6 +167,19 @@
                 Contacto: function (event) {
                     window.location.href = "al_contacto.html";
                 },
+                allavisos: function(event){
+                    axios({
+                       method: 'POST',
+                       url: '../../php/all_avisos.php',
+                       data: {
+                        }
+                   }) .then((response) => {
+                       this.ResultadoConsulta=response.data;
+                   })
+                },
+            },
+            created(){
+                this.allavisos();
             },
             computed: {
 

@@ -38,6 +38,7 @@
     </style>
     <!-- VUE -->
     <div id="app">
+                
         <div class="grid-container" id="fixed">
             <!-- Barra superior -->
             <div class="grid-itemHeader" id="azul1">  
@@ -66,46 +67,47 @@
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
+
+                <!-- Ingreso ala pagina agregar avisos -->
+                <div class="Banner-grid-item-izq-filtros " id="azul3">
+                    <div class="d-grid">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="AGavisos">Agregar nuevo aviso</button>
+                    </div>
+                  </div>
+
                 <div class="card mb-3">
                     <div class="card-body">
-                      <h5 class="card-title"><strong>Aviso Importante</strong></h5>
-                      <p class="card-text"><strong>Esta es la semana de pagos</strong><br>Favor de que todos los administradores 
-                        suban en tiempo y forma si alguno de los alumnos tiene acceso a la escuela por su estado financiero</p>
-                      <p class="card-text"><small class="text-muted">Publicado de 10  minutos</small></p>
-                      <p class="card-text"><small class="text-muted">Publicado por la Lic. Alicia</small></p>
-                    </div>
-                    <img src="../../imagenes/acceso.jpg" class="imagen" >
-                    <br>
-                    <input class="form-control" type="text" placeholder="Escriba aqui" aria-label="default input example"> 
-                    <br>
-                    <div>
-                        <button type="button" class="btn btn-primary">Editar</button>                
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                        <h5 class="card-title"><strong>Avisos Importantes</strong></h5>
                     </div>
                     <br>
-                     </div>
-                  <div class="card text-center">
-                    <div class="card-header">
-                        <strong></strong>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Tendran 3 semanas para ir dando de alta a los alumnos de nuevo ingreso</h5>
-                      <p class="card-text"><strong>Favor de que sea lo mas pronto posible</strong></p>
-                    </div>
-                    <input class="form-control" type="text" placeholder="Aviso importante para dar de alta a los nuevos alumnos" aria-label="default input example"> 
-                   <br>
-                    <div>
-                        <button type="button" class="btn btn-success">Publicar</button>               
-                        <button type="button" class="btn btn-danger">Cancelar</button>
-                    </div>
+                 <div class="" v-for="row in ResultadoConsulta">
+                   
+                    <h4>{{row.titulo}}</h4>
+                    <h6>{{row.cuerpo}}</h6>
+
                     <br>
+
                     <div class="card-footer text-muted">
-                      Publicado hace 2 horas
+                        Publicado el {{row.fecha_hora}}
                     </div>
                     <div class="card-footer text-muted">
-                        Publicado por Carlos Lopez
+                        Publicado por {{row.nombre}}
                     </div>
                     
+                    <br>
+
+                    <div>               
+                        <button type="button" class="btn btn-danger" v-on:click="Eliminar">Eliminar</button>
+                    </div>
+                    
+                    <br> <br> 
+
+                    </div>
+                    <div class="card text-center">
+                        <div class="card-header"><strong></strong>
+                    </div>
+                    
+                 </div>
                 </div>
 
             </div>
@@ -134,6 +136,10 @@
             </div>
         </div>        
     </div>
+
+     <!-- AXIOS -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- VERIFICAR ÚLTIMO INGRESO-->
     <!-- <script src="../../js/sesioniniciada_admin.js"></script> -->
     <!-- CÓDIGO JS/VUE-->
@@ -147,7 +153,8 @@
                 tipo_usuario:"admin",
                 Titulo_Principal: "Avisos",
                 gcorreo: "",
-                gid: ""
+                gid: "",
+                ResultadoConsulta:[]
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -162,6 +169,19 @@
                 Seleccionar: function (event) {
                     window.location.href = "ad_seleccionar.html"
                 },
+                AGavisos: function(event){
+                    window.location.href = "ad_agregar_avisos.html"
+                },
+                allavisos: function(event){
+                    axios({
+                       method: 'POST',
+                       url: '../../php/all_avisos.php',
+                       data: {
+                        }
+                   }) .then((response) => {
+                       this.ResultadoConsulta=response.data;
+                   })
+                },
             },
             created(){
                 //CARGAR VARIABLES GLOBALES
@@ -174,6 +194,8 @@
                if (data2 != null) {
                    this.gid = data2;
                }
+
+               this.allavisos();
             },
             computed: {
 
