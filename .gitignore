@@ -1,3 +1,4 @@
 /vendor/
 composer.json
-/src/Models.php
+Models.php
+pdoconfig.php

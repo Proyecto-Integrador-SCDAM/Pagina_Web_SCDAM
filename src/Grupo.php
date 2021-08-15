@@ -67,6 +67,20 @@
             return $Aux;
         }
 
+        //ID SIN GRUPO
+        public function GrupoASC(){
+            
+            $stmt = self::$pdo->prepare("SELECT * FROM grupos order by grado ASC");
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($resultados){
+                return  json_encode($resultados); //Devolver sí hay al menos 1 resultado
+            } else {
+                return 0;
+            }
+        }
+
+        //ALTA GRUPO
         public function NuevoGrupo($grado, $seccion, $turno, $periodo){
             $stmt = self::$pdo->prepare("INSERT INTO $this->table(grado, seccion, turno, periodo) 
             VALUES (:grado, :seccion, :turno, :periodo)");
@@ -75,5 +89,14 @@
             $stmt->bindParam(":turno",$turno);
             $stmt->bindParam(":periodo",$periodo);
             $stmt->execute();
+        }
+
+        //CONTAR GRUPOS
+        public function ContarGrupos(){
+            
+            $stmt = self::$pdo->prepare("SELECT * FROM grupos order by grado ASC");
+            $stmt->execute();
+            $cuenta = $stmt->rowCount(); //Contar filas
+            return $cuenta;
         }
     }

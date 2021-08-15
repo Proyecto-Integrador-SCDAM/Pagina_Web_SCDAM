@@ -34,6 +34,16 @@
             $stmt->execute();
             
         } 
+
+        //ALTA MAESTRO GRUPO
+        public function NuevoMaestroG($grupo, $profesor){
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table(grupo, profesor) 
+            VALUES (:grupo, :profesor)");
+            $stmt->bindParam(":grupo",$grupo);
+            $stmt->bindParam(":profesor",$profesor);
+
+            $stmt->execute();
+        }
         
         
     }
