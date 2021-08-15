@@ -42,4 +42,11 @@ namespace proyecto;
             return $Aux;
         }
 
+        public function eliminarAv($id_av)
+        {
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table Where id_av=:id_av");
+            $stmt->bindParam(":id_av",$id_av);
+            $stmt->execute();
+        }
+
     }

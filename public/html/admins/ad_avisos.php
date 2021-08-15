@@ -1,7 +1,7 @@
 <?php
     namespace proyecto;
 
-    require ("../../verificaradmin.php")
+    //require ("../../verificaradmin.php")
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +34,16 @@
     width: 30vh;
     justify-content: center;
     margin-left: 93vh;
+}   
+.Cajabox{
+    margin-top: 3vh;
+    background-color: #DEF2F1;
+}
+.bote:hover{
+    fill: red;
+}
+.bote{
+    fill: black;
 }
     </style>
     <!-- VUE -->
@@ -76,14 +86,15 @@
                   </div>
 
                 <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>Avisos Importantes</strong></h5>
-                    </div>
-                    <br>
-                 <div class="" v-for="row in ResultadoConsulta">
-                   
-                    <h4>{{row.titulo}}</h4>
-                    <h6>{{row.cuerpo}}</h6>
+                <div v-for="row in ResultadoConsulta" class="Cajabox">
+                   <br>
+                    <h4>{{row.titulo}}
+                            <svg style="float:right" v-on:click="EliminarAv(row.id_av)" type="button" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-trash bote" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                    </h4>
+                    <h5>{{row.cuerpo}}</h5>
 
                     <br>
 
@@ -93,21 +104,14 @@
                     <div class="card-footer text-muted">
                         Publicado por {{row.nombre}}
                     </div>
-                    
                     <br>
-
-                    <div>               
-                        <button type="button" class="btn btn-danger" v-on:click="Eliminar">Eliminar</button>
-                    </div>
-                    
-                    <br> <br> 
 
                     </div>
                     <div class="card text-center">
                         <div class="card-header"><strong></strong>
                     </div>
                     
-                 </div>
+                </div>
                 </div>
 
             </div>
@@ -154,7 +158,7 @@
                 Titulo_Principal: "Avisos",
                 gcorreo: "",
                 gid: "",
-                ResultadoConsulta:[]
+                ResultadoConsulta:""
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -182,6 +186,23 @@
                        this.ResultadoConsulta=response.data;
                    })
                 },
+                EliminarAv:function(event){
+                    
+                    var mensaje = confirm("¿Desea borrar este aviso?");
+
+                    if(mensaje){
+                        var params = new URLSearchParams();
+                        params.append('id_av', event);
+                        axios.post('../../controller_borrar_aviso.php', params)
+                        .then((response) => {
+                            console.log(response);
+                            this.allavisos();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
+                }
             },
             created(){
                 //CARGAR VARIABLES GLOBALES
