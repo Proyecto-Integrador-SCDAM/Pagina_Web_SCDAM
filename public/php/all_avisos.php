@@ -8,9 +8,14 @@ $stmt = $pdo->query("SELECT avisos.id_av, avisos.titulo, avisos.cuerpo, avisos.f
     INNER JOIN personas ON personas_avisos.persona_av=personas.id_per");
 
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
+$cuenta = $stmt->rowCount();
 
-while ($row = $stmt->fetch()) {
-    $datos[] = $row;
+if ($cuenta > 0){
+    while ($row = $stmt->fetch()) {
+        $datos[] = $row;
+    }
+} else {
+    $datos = NULL;
 }
 
 $stmt = null;

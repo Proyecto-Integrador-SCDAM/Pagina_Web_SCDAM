@@ -47,7 +47,14 @@ namespace proyecto;
             
             $stmt = self::$pdo->prepare("DELETE FROM $this->table WHERE id_av IN (SELECT avisos.id_av FROM avisos left join personas_avisos on personas_avisos.aviso=avisos.id_av WHERE personas_avisos.id_peav is null)");
             $stmt->execute();
+
+        }
             
+        public function eliminarAv($id_av)
+        {
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table Where id_av=:id_av");
+            $stmt->bindParam(":id_av",$id_av);
+            $stmt->execute();
         }
 
     }

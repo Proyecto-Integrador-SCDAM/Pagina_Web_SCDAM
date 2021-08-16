@@ -37,4 +37,9 @@ namespace proyecto;
             $stmt->execute();
             
         }
-    }
+        public function BorrarAP($aviso){
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table Where aviso=:aviso");
+            $stmt->bindParam(":aviso",$aviso);
+            $stmt->execute();
+        }
+}
