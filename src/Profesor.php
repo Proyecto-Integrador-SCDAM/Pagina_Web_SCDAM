@@ -20,9 +20,7 @@
         public $id_prof = "";
         public $persona_prof = "";
         
-        
-    
-    
+        //PROFESOR LOGIN
         public function VerificarProfesor($persona_prof){
             
             $stmt = self::$pdo->prepare("select *  from $this->table  where  persona_prof=:persona_prof");
@@ -36,6 +34,24 @@
                 return 0;
             }
         }
-        
+
+        //ALTA MAESTRO
+        public function NuevoMaestro($persona_prof){
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table(persona_prof) 
+            VALUES (:persona_prof)");
+            $stmt->bindParam(":persona_prof",$persona_prof);
+            $stmt->execute();
+        }
+
+        //ÚLTIMO PROFESOR
+        public function UltimoProfe(){
+            
+            $stmt = self::$pdo->prepare("SELECT id_prof FROM $this->table ORDER BY id_prof DESC LIMIT 1");
+            $stmt->execute();
+            while ($row = $stmt->fetch()) {
+                $Aux = $row['id_prof'];
+            }
+            return $Aux;
+        }
         
     }

@@ -14,7 +14,9 @@
         $Aux = ( $c->CorreoExistente($dCorreo));
 
         if ($Aux == "0"){
-            $Aux = ( $c->NFCExistente($dNFC));
+            if ($dNFC != ""){
+                $Aux = ( $c->NFCExistente($dNFC));
+            }
         }
 
 

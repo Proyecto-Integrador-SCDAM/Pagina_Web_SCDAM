@@ -59,5 +59,16 @@
             $stmt->execute();
         }
         
+        #ALTA ALUMNO
+        public function AltaAlumno($persona_alu, $grupo_alu, $especialidad){
+            
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table (persona_alu, grupo_alu, especialidad)
+            VALUES (:persona_alu, :grupo_alu, :especialidad)");
+            $stmt->bindParam(":persona_alu",$persona_alu);
+            $stmt->bindParam(":grupo_alu",$grupo_alu);
+            $stmt->bindParam(":especialidad",$especialidad);
+
+            $stmt->execute();
+        }
         
     }

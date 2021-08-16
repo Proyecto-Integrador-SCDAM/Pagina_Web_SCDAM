@@ -6,14 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAYOUT</title>
     <link rel="stylesheet" media="all" href="../../css/stylegrup.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
     <!-- VUE -->
     <div id="app">
         <div class="grid-container" id="fixed">
@@ -21,7 +17,7 @@
             <div class="grid-itemHeader" id="azul1">  
                 <div class="Banner-grid-container">
 
-                    <div class="Banner-grid-item-izq" id="azul2">
+                    <div class="Banner-grid-item-izq" id="azul2" v-on:click="Volver">
                         <div class="Centrar">
                             <img v-if="c_volver == 1" src="../../imagenes/volver-flecha.png" height="50%" width="30%">
                         </div>
@@ -33,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="Banner-grid-item-der cerrarses" id="azul2">
+                    <div class="Banner-grid-item-der cerrarses" id="azul2" v-on:click="CerrarSesion">
                         <div class="Centrar"> 
                             <img src="../../imagenes/apagar.png" height="50%" width="30%">
                         </div>
@@ -49,43 +45,38 @@
                     <div class="colfondo">
                         <h2 class="desc">AÑADE UN GRUPO<span class="badge bg-secondary"></span></h2>
                     </div>
+                    <br> <br>
                         <div class="row g-3">
-                            <div class="col">
-                                <h4>Id del grupo<span class="badge bg-secondary"></span></h4>
-                              <input type="text" class="form-control" placeholder="1" aria-label="Disabled input example" disabled>
-                            </div>
+                            
                             <div class="col">
                                 <h4>Grado<span class="badge bg-secondary"></span></h4>
-                                <input type="text" class="form-control" placeholder="Grado" aria-label="Last name">
+                                <input type="text" class="form-control" placeholder="Grado" aria-label="Last name" v-model="Ngrado">
                             </div>
                             <div class="col">
                                 <h4>Sección<span class="badge bg-secondary"></span></h4>
-                                <input type="text" class="form-control" placeholder="Sección" aria-label="Last name">
+                                <input type="text" class="form-control" placeholder="Sección" aria-label="Last name" v-model="Nseccion">
                               </div>
-                              <div class="colfondo">
-                                <h2 class="desc">ÚLTIMOS DATOS<span class="badge bg-secondary"></span></h2>
-                            </div>
                               <div class="row g-3">
                                 <div class="col">
                                     <h4>Turno<span class="badge bg-secondary"></span></h4>
-                                  <select class="form-select" aria-label="Default select example">
+                                  <select class="form-select" aria-label="Default select example" v-model="Nturno">
                                     <option selected>Selecciona una opción</option>
-                                    <option value="1">Matutino</option>
-                                    <option value="2">Vespertino</option>
+                                    <option value="matutino">Matutino</option>
+                                    <option value="vespertino">Vespertino</option>
                                 </select>
                             </div>
                             <div class="col">
                                 <h4>Periodo<span class="badge bg-secondary"></span></h4>
-                              <select class="form-select" aria-label="Default select example">
+                              <select class="form-select" aria-label="Default select example" v-model="Nperiodo">
                                 <option selected>Selecciona una opción</option>
-                                <option value="1">Enero-Abril</option>
-                                <option value="2">Mayo-Agosto</option>
-                                <option value="3">Septiembre-Diciembre</option>
+                                <option value="Enero-Abril">Enero-Abril</option>
+                                <option value="Mayo-Agosto">Mayo-Agosto</option>
+                                <option value="Septiembre-Diciembre">Septiembre-Diciembre</option>
                             </select>
                         </div>
                             <div class="col">
                                 <h4>Año<span class="badge bg-secondary"></span></h4>
-                                <input type="text" class="form-control" placeholder="Año" aria-label="Last name">
+                                <input type="text" class="form-control" placeholder="Año" aria-label="Last name" v-model="Nano">
                             </div>
                          </div>
                            <div class="cent">  
@@ -122,6 +113,14 @@
         </div>        
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+
     <!-- CÓDIGO JS/VUE-->
     <script>
         //MENSAJE
@@ -131,10 +130,43 @@
                 c_volver: 1,
                 c_footer: 0,
                 tipo_usuario:"admin",
-                Titulo_Principal: "Nuevo grupo"
+                Titulo_Principal: "Nuevo grupo",
+                Ngrado:"",
+                Nseccion:"",
+                Nturno:"",
+                Nperiodo:"",
+                Nano:"",
             },
             methods: {
-                
+                CerrarSesion: function (event) {
+                    window.location.href = "../../index.html"
+                },
+                Volver: function (event) {
+                    window.location.href = "ad_editar_grupos.html"
+                },
+                Guardar:function(){
+                    if(this.Ngrado !="" && this.Nseccion !="" && this.Nturno !="Selecciona una opción" && this.Nperiodo !="Selecciona una opción" && this.Naño !="" ){
+                        var params = new URLSearchParams();
+                        params.append('grado', this.Ngrado);
+                        params.append('seccion', this.Nseccion);
+                        params.append('turno', this.Nturno);
+                        params.append('periodo', this.Nperiodo);
+                        params.append('ano', this.Nano);
+                        
+                        axios.post('../../controller_alta_grupo.php', params)
+
+                        .then((response) => {
+                                console.log(response);
+                                alert("Grupo dado de alta correctamente");
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
+                    else {
+                        alert("Favor de llenar todos los campos obligatorios");
+                    }
+                }
             },
             computed: {
 

@@ -9,28 +9,22 @@
        
         extract($_POST);       
         
-        #ID DEL GRUPO
-        $Aux = "0";
-        $gr= new Grupo();
-        $Aux = $gr->GrupoConcatenado($id_grup);
-
-        if ($Aux == "0"){
-            $Aux = $gr->SinGrupo();
-        }        
         
         #ALTA PERSONA
         $per=new Persona();        
         $per->AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC, $permiso, $causa_denegada);
 
-        #ALTA ALUMNO
-        $al=new Alumno();        
-        $al->AltaAlumno($per->UltimaPersona(), $Aux, $especialidad);
+        #ALTA MAESTRO
+        $pr=new Profesor();
+        $pr->NuevoMaestro($per->UltimaPersona());        
+
+        #GRUPO
+        $gr= new Grupo();
+        $grupos = $gr->GrupoASC();
 
         #RESPUESTA
 
-        $RespuestaCon = [
-            "msg" => $Aux
-        ];
+        $RespuestaCon = $gr->ContarGrupos();
 
         echo json_encode($RespuestaCon);
 

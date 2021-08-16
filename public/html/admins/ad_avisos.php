@@ -1,7 +1,7 @@
 <?php
     namespace proyecto;
 
-    require ("../../verificaradmin.php")
+    //require ("../../verificaradmin.php")
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +34,21 @@
     width: 30vh;
     justify-content: center;
     margin-left: 93vh;
+}   
+.Cajabox{
+    margin-top: 3vh;
+    background-color: #DEF2F1;
+}
+.bote:hover{
+    fill: red;
+}
+.bote{
+    fill: black;
 }
     </style>
     <!-- VUE -->
     <div id="app">
+                
         <div class="grid-container" id="fixed">
             <!-- Barra superior -->
             <div class="grid-itemHeader" id="azul1">  
@@ -66,46 +77,41 @@
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
+
+                <!-- Ingreso ala pagina agregar avisos -->
+                <div class="Banner-grid-item-izq-filtros " id="azul3">
+                    <div class="d-grid">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="AGavisos">Agregar nuevo aviso</button>
+                    </div>
+                  </div>
+
                 <div class="card mb-3">
-                    <div class="card-body">
-                      <h5 class="card-title"><strong>Aviso Importante</strong></h5>
-                      <p class="card-text"><strong>Esta es la semana de pagos</strong><br>Favor de que todos los administradores 
-                        suban en tiempo y forma si alguno de los alumnos tiene acceso a la escuela por su estado financiero</p>
-                      <p class="card-text"><small class="text-muted">Publicado de 10  minutos</small></p>
-                      <p class="card-text"><small class="text-muted">Publicado por la Lic. Alicia</small></p>
-                    </div>
-                    <img src="../../imagenes/acceso.jpg" class="imagen" >
-                    <br>
-                    <input class="form-control" type="text" placeholder="Escriba aqui" aria-label="default input example"> 
-                    <br>
-                    <div>
-                        <button type="button" class="btn btn-primary">Editar</button>                
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                    </div>
-                    <br>
-                     </div>
-                  <div class="card text-center">
-                    <div class="card-header">
-                        <strong></strong>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Tendran 3 semanas para ir dando de alta a los alumnos de nuevo ingreso</h5>
-                      <p class="card-text"><strong>Favor de que sea lo mas pronto posible</strong></p>
-                    </div>
-                    <input class="form-control" type="text" placeholder="Aviso importante para dar de alta a los nuevos alumnos" aria-label="default input example"> 
+                <div v-for="row in ResultadoConsulta" class="Cajabox">
                    <br>
-                    <div>
-                        <button type="button" class="btn btn-success">Publicar</button>               
-                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    <h4>{{row.titulo}}
+                            <svg style="float:right" v-on:click="EliminarAv(row.id_av)" type="button" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-trash bote" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                    </h4>
+                    <h5>{{row.cuerpo}}</h5>
+
+                    <br>
+
+                    <div class="card-footer text-muted">
+                        Publicado el {{row.fecha_hora}}
+                    </div>
+                    <div class="card-footer text-muted">
+                        Publicado por {{row.nombre}}
                     </div>
                     <br>
-                    <div class="card-footer text-muted">
-                      Publicado hace 2 horas
+
                     </div>
-                    <div class="card-footer text-muted">
-                        Publicado por Carlos Lopez
+                    <div class="card text-center">
+                        <div class="card-header"><strong></strong>
                     </div>
                     
+                </div>
                 </div>
 
             </div>
@@ -134,6 +140,10 @@
             </div>
         </div>        
     </div>
+
+     <!-- AXIOS -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- VERIFICAR ÚLTIMO INGRESO-->
     <!-- <script src="../../js/sesioniniciada_admin.js"></script> -->
     <!-- CÓDIGO JS/VUE-->
@@ -147,7 +157,8 @@
                 tipo_usuario:"admin",
                 Titulo_Principal: "Avisos",
                 gcorreo: "",
-                gid: ""
+                gid: "",
+                ResultadoConsulta:""
             },
             methods: {
                 CerrarSesion: function (event) {
@@ -162,6 +173,36 @@
                 Seleccionar: function (event) {
                     window.location.href = "ad_seleccionar.html"
                 },
+                AGavisos: function(event){
+                    window.location.href = "ad_agregar_avisos.html"
+                },
+                allavisos: function(event){
+                    axios({
+                       method: 'POST',
+                       url: '../../php/all_avisos.php',
+                       data: {
+                        }
+                   }) .then((response) => {
+                       this.ResultadoConsulta=response.data;
+                   })
+                },
+                EliminarAv:function(event){
+                    
+                    var mensaje = confirm("¿Desea borrar este aviso?");
+
+                    if(mensaje){
+                        var params = new URLSearchParams();
+                        params.append('id_av', event);
+                        axios.post('../../controller_borrar_aviso.php', params)
+                        .then((response) => {
+                            console.log(response);
+                            this.allavisos();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
+                }
             },
             created(){
                 //CARGAR VARIABLES GLOBALES
@@ -174,6 +215,8 @@
                if (data2 != null) {
                    this.gid = data2;
                }
+
+               this.allavisos();
             },
             computed: {
 

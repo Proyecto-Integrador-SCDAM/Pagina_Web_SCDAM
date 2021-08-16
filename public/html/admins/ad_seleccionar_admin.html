@@ -160,8 +160,8 @@
                 },
                 EditarPersona:function(event)
                 {
-                  alert("Persona: " + event);
-                  //window.location.href = "ad_cambios_admin.php" 
+                  localStorage.setItem("editarper", event);
+                  window.location.href = "ad_cambios_admin.php" 
                 },
               CerrarSesion: function (event) {
                     window.location.href = "../../index.html"
