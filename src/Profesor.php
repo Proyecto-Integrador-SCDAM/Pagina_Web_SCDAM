@@ -67,4 +67,13 @@
                 return 0;
             }
         }
+
+        //ELIMINAR PERSONA
+        public function EliminarMaestro($persona_prof){
+            
+            $stmt = self::$pdo->prepare("delete from $this->table where persona_prof=:persona_prof");
+            $stmt->bindParam(":persona_prof",$persona_prof);
+            $stmt->execute();
+            
+        }
     }

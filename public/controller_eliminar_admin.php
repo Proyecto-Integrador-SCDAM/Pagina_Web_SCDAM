@@ -9,6 +9,9 @@
        
         extract($_POST);       
         
+        //Eliminar registro
+        $reg = new registros();
+        $reg->EliminarRegistrosPersona($idcon);
         #Eliminar persona avisos
         $pa = new personas_avisos();
         $pa->EliminarPorPersona($idcon);

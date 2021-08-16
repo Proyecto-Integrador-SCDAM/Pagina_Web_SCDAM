@@ -167,7 +167,7 @@
                       </div>
                       <div class="row g-3 centro">
                         <div class="col-md-3">
-                          <h4>Codigo NFC<span class="badge bg-secondary"></span></h4>
+                          <h4>Código NFC<span class="badge bg-secondary"></span></h4>
                           <input v-model="dNFC" type="text" class="form-control centro" placeholder="NFC" aria-label="Last name">
                         </div>
 
@@ -201,7 +201,7 @@
                       <div>
                         <br>
                         <div class="cen"> 
-                          <button type="button" class="btn btn-success col-md-2" v-on:click="VerificarUnicos">Dar de alta</button>
+                          <button type="button" class="btn btn-success col-md-2" v-on:click="ArreglarVariables">Dar de alta</button>
                         </div>
                         <br>
                         <br>

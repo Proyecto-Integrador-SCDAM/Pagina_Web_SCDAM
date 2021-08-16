@@ -167,7 +167,7 @@
                       </div>
                       <div class="row g-3 centro">
                         <div class="col-md-3">
-                          <h4>Codigo NFC<span class="badge bg-secondary"></span></h4>
+                          <h4>Código NFC<span class="badge bg-secondary"></span></h4>
                           <input v-model="dNFC" type="text" class="form-control centro" placeholder="NFC" aria-label="Last name">
                         </div>
 
@@ -205,6 +205,10 @@
                         </div>
                         <br>
                         <br>
+                        <div class="cen"> 
+                          <button type="button" class="btn btn-danger col-md-2" v-on:click="Eliminar">Eliminar maestro</button>
+                       </div>
+                       <br>
                       </div>
                   </form>
             </div>
@@ -257,6 +261,23 @@
                 DemoVar: function (event) {
                     //alert(this.checkedGrupo[4]);
                     //this.checkedGrupo[3] = true;
+                },
+                Eliminar:function(){
+                  var mensaje = confirm("¿Desea eliminar este maestro?");
+                  if (mensaje) {
+                    var params = new URLSearchParams();
+                    params.append('idcon', this.idcon);
+
+                    axios.post('../../controller_eliminar_maestro.php', params)
+
+                    .then((response) => {
+                        console.log(response);
+                        window.location.href = "ad_seleccionar_maestro.html";
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                  }
                 },
                 ContarGrupos:function(event){
                   axios({

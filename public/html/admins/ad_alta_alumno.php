@@ -160,7 +160,7 @@
                       </div>
                       <div class="row g-3 centro">
                         <div class="col-md-3">
-                          <h4>Codigo NFC<span class="badge bg-secondary"></span></h4>
+                          <h4>Código NFC<span class="badge bg-secondary"></span></h4>
                           <input v-model="dNFC" type="text" class="form-control centro" placeholder="NFC" aria-label="Last name">
                         </div>
 
@@ -181,7 +181,7 @@
                         </div>
                         </div>
                         <br>
-                        <h2 class="letra color">DATOS ACADEMICOS <span class="badge bg-secondary" ></span></h2> 
+                        <h2 class="letra color">DATOS ACADÉMICOS <span class="badge bg-secondary" ></span></h2> 
                         
                         <div class="flex-container">
                         <div class="col-md-4">
