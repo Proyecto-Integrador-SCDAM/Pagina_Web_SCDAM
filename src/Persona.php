@@ -151,7 +151,7 @@
             $stmt->bindParam(":fecha_nacimiento",$fecha_nacimiento);
             $stmt->bindParam(":u_password",$u_password);
             $stmt->bindParam(":NFC",$NFC);
-            $stmt->bindParam(":permiso",$permiso);
+            $stmt->bindParam(":permiso",$permiso, PDO::PARAM_INT);
             $stmt->bindParam(":causa_denegada",$causa_denegada);
 
             $stmt->execute();

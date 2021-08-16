@@ -42,4 +42,12 @@ namespace proyecto;
             return $Aux;
         }
 
+        //ELIMINAR TODOS LOS AVISOS SIN AUTOR
+        public function EliminarSinAutor(){
+            
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table WHERE id_av IN (SELECT avisos.id_av FROM avisos left join personas_avisos on personas_avisos.aviso=avisos.id_av WHERE personas_avisos.id_peav is null)");
+            $stmt->execute();
+            
+        }
+
     }

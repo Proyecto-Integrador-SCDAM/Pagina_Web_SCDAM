@@ -42,6 +42,15 @@
             $stmt->bindParam(":id",$id);
             $stmt->execute();
         }
+
+        //ELIMINAR ADMINISTRADOR
+        public function Eliminar($persona_ad){
+            
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table WHERE persona_ad=:persona_ad");
+            $stmt->bindParam(":persona_ad",$persona_ad);
+            $stmt->execute();
+            
+        }
         
         
     }

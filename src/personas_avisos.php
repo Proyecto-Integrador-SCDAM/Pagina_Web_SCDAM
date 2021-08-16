@@ -21,11 +21,20 @@ namespace proyecto;
         public $persona_av = "";
         public $aviso = "";
     
-    public function datosPer($persona_av, $aviso){
-        $stmt = self::$pdo->prepare("INSERT INTO $this->table(persona_av, aviso ) 
-            VALUES (:persona_av, :aviso)");
-        $stmt->bindParam(":persona_av",$persona_av);
-        $stmt->bindParam(":aviso",$aviso);
-        $stmt->execute();
-    }
+        public function datosPer($persona_av, $aviso){
+            $stmt = self::$pdo->prepare("INSERT INTO $this->table(persona_av, aviso ) 
+                VALUES (:persona_av, :aviso)");
+            $stmt->bindParam(":persona_av",$persona_av);
+            $stmt->bindParam(":aviso",$aviso);
+            $stmt->execute();
         }
+
+        //ELIMINAR TODOS LOS AVISOS DE DETERMINADA PERSONA
+        public function EliminarPorPersona($persona_av){
+            
+            $stmt = self::$pdo->prepare("DELETE FROM $this->table WHERE persona_av=:persona_av");
+            $stmt->bindParam(":persona_av",$persona_av);
+            $stmt->execute();
+            
+        }
+    }

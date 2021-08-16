@@ -67,7 +67,7 @@
             return $Aux;
         }
 
-        //ID SIN GRUPO
+        //GRUPO
         public function GrupoASC(){
             
             $stmt = self::$pdo->prepare("SELECT * FROM grupos order by grado ASC");

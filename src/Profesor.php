@@ -53,5 +53,18 @@
             }
             return $Aux;
         }
-        
+
+        //DE ID PERSONA A ID PROFESOR
+        public function IDperAIDma($idcon){
+            
+            $stmt = self::$pdo->prepare("SELECT profesores.id_prof FROM profesores INNER JOIN personas on profesores.persona_prof=personas.id_per WHERE personas.id_per=:idcon");
+            $stmt->bindParam(":idcon",$idcon);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($resultados){
+                return  ($resultados[0]["id_prof"]); //Devolver sí hay al menos 1 resultado
+            } else {
+                return 0;
+            }
+        }
     }

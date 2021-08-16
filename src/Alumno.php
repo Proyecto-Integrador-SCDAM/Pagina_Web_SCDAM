@@ -70,5 +70,69 @@
 
             $stmt->execute();
         }
-        
+
+        //DE MATRICULA ID PERSONA
+        public function MatAID($matricula){
+            
+            $stmt = self::$pdo->prepare("SELECT persona_alu from $this->table  where  matricula=:matricula");
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            if ($resultados){
+                return  ($resultados[0]["persona_alu"]); //Devolver sí hay al menos 1 resultado
+            } else {
+                return 0;
+            }
+        }
+
+        //CARGAR INFORMACIÓN DE ALUMNO
+        public function CargarAlu($matricula){
+            
+            $stmt = self::$pdo->prepare("select *  from $this->table  where  matricula=:matricula");
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            if ($resultados){
+                return  json_encode($resultados[0]); //Devolver sí hay al menos 1 resultado
+            } else {
+                return 0;
+            }
+        }
+
+        //GRUPOS POR MATRÍCULA
+        public function GrupoMat($matricula){
+            
+            $stmt = self::$pdo->prepare("SELECT * FROM $this->table INNER JOIN grupos ON alumnos.grupo_alu=grupos.id_grup WHERE alumnos.matricula=:matricula");
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($resultados){
+                return  json_encode($resultados[0]); //Devolver sí hay al menos 1 resultado
+            } else {
+                return 0;
+            }
+        }
+
+        //ACTUALIZAR DATOS
+        public function EditarAlumno($matricula, $especialidad, $grupo_alu){
+            
+            $stmt = self::$pdo->prepare("UPDATE $this->table SET especialidad = :especialidad, grupo_alu = :grupo_alu WHERE matricula=:matricula");
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->bindParam(":especialidad",$especialidad);
+            $stmt->bindParam(":grupo_alu",$grupo_alu);
+
+
+            $stmt->execute();
+        }
+
+        //ELIMINAR PERSONA
+        public function EliminarAlumno($matricula){
+            
+            $stmt = self::$pdo->prepare("delete from $this->table where matricula=:matricula");
+            $stmt->bindParam(":matricula",$matricula);
+            $stmt->execute();
+            
+        }
     }

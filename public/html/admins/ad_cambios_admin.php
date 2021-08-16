@@ -212,7 +212,6 @@
 
     <!-- CÓDIGO JS/VUE-->
     <script>
-        //MENSAJE
         var vm = new Vue ({
             el: "#app", //Elemento
             data: { 
@@ -239,9 +238,6 @@
                 Volver: function (event) {
                     window.location.href = "ad_seleccionar_admin.html"
                 },
-                Eliminar:function(event){
-                
-                },
                 CargarTabla:function(){
                     var params = new URLSearchParams();
                     params.append('idcon', this.idcon);
@@ -266,6 +262,8 @@
                     });
                 },
                 Eliminar:function(){
+                  var mensaje = confirm("¿Desea eliminar este administrador?");
+                  if (mensaje) {
                     var params = new URLSearchParams();
                     params.append('idcon', this.idcon);
 
@@ -273,11 +271,12 @@
 
                     .then((response) => {
                         console.log(response);
-                        //window.location.href = "ad_seleccionar_admin.html";
+                        window.location.href = "ad_seleccionar_admin.html";
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
+                  }
                 },
                 Cambios:function(){
                     var params = new URLSearchParams();

@@ -25,4 +25,13 @@
         public $estado = "";
         public $ubicacion = "";
         public $persona_r = "";
+
+        //ELIMINAR REGISTROS DE UNA PERSONA
+        public function EliminarRegistrosPersona($persona_r){
+            
+            $stmt = self::$pdo->prepare("delete from $this->table where persona_r=:persona_r");
+            $stmt->bindParam(":persona_r",$persona_r);
+            $stmt->execute();
+            
+        }
     }
