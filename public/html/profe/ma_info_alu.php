@@ -67,7 +67,7 @@
                             <div class="cent">
                                 <h6><b>Acceso:</b> {{ResultadoConsulta["PERMISO"]}}</h6>
                             </div> 
-                            <div class="cent">
+                            <div class="cent" v-if="ResultadoConsulta['CAUSA'] != ''"> 
                                 <h6><b>Causa de denegación:</b> {{ResultadoConsulta["CAUSA"]}}</h6>
                             </div> 
                         </form>
