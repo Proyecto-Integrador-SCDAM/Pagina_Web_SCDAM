@@ -5,7 +5,7 @@ $recibirjson = json_decode(file_get_contents('php://input'), true);
 $matcon=$recibirjson['matcon'];
 try{
 
-    $stmt = $pdo->query("SELECT personas.nombre AS 'NOMBRE', alumnos.especialidad AS 'ESPECIALIDAD', 
+    $stmt = $pdo->query("SELECT concat(personas.nombre, ' ', personas.apellido_paterno, ' ', personas.apellido_materno) AS 'NOMBRE', alumnos.especialidad AS 'ESPECIALIDAD', 
     alumnos.matricula AS 'MATRICULA', 
     concat(grupos.grado, grupos.seccion) AS 'GRUPO', 
     personas.telefono AS 'TELEFONO', personas.genero AS 'GENERO', personas.permiso AS 'PERMISO', 

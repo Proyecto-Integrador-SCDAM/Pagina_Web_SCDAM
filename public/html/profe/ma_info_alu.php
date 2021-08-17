@@ -140,7 +140,7 @@
                    })
                },
                CerrarSesion: function (event) {
-                    window.location.href = "../cerrarsession.php"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "ma_seleccionar.php"
