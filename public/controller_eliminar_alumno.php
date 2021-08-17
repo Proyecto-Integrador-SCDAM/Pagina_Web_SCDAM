@@ -24,7 +24,7 @@
         $alu->EliminarAlumno($matcon);
 
         //Eliminar persona
-        $alu->EliminarPersona($idcon);
+        $per->EliminarPersona($idcon);
 
 
     } catch (Exception $e) {
