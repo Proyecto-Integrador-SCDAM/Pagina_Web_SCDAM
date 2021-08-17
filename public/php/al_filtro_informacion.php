@@ -6,9 +6,9 @@ $correocon=$recibirjson['correocon'];
 
 try{
 
-    $stmt = $pdo->query("SELECT personas.nombre AS 'NOMBRE', alumnos.especialidad AS 'ESPECIALIDAD', 
+    $stmt = $pdo->query("SELECT concat(personas.nombre, ' ', personas.apellido_paterno, ' ' , personas.apellido_materno) AS 'NOMBRE', alumnos.especialidad AS 'ESPECIALIDAD', 
     alumnos.matricula AS 'MATRICULA', 
-    concat(grupos.grado, grupos.seccion) AS 'GRUPO', 
+    concat(grupos.grado, grupos.seccion, ' ', grupos.turno, ' ', grupos.periodo) AS 'GRUPO', 
     personas.telefono AS 'TELEFONO', personas.genero AS 'GENERO', personas.permiso AS 'PERMISO', 
     personas.causa_denegada AS 'CAUSA' 
     FROM alumnos 

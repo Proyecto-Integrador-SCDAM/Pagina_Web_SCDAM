@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaralumno.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +18,7 @@
 
     <style>
         .inicio{
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family:Arial, Helvetica, sans-serif;
         display: grid;
         grid-template-columns: repeat(4fr, 25%);
         grid-template-rows: repeat(4fr, 25%);
@@ -21,11 +27,22 @@
         width: 100vw;
     }
     .texto1{
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 2;
-        padding: 10px;
+        position:relative;
+        transform: translate(-50%, -50%);
+        top: 70%;
+        left: 49%;
+        width: 660px;
+        background-color:rgb(195, 235, 238);
+        border-radius: 20px;
+    }
+    .texto1 form{ 
+        padding: 0 60px;
+        box-sizing: border-box;
+    }
+    form .prin{ 
+        position: relative;
+        border-bottom: 3px solid #78aa9d;
+        margin: 20px;
     }
     .texto2{
         grid-column-start: 1;
@@ -45,18 +62,16 @@
     .redes{
         padding: 100px;
     }
-    .redes h5{
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        text-align: center;
-        font-weight: bold;
-    }
+
     .redsocial{
-        text-align: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-top: 4%;
+        padding-bottom: 600px;
     }
     .redsocial li{
-        display: inline-block;
+        display:inline-block;
     }
     .pass{
         padding: 30px;
@@ -92,20 +107,25 @@
                     </div>
                 </div>
                 <div class="Centrar">
-                    <h1>NOMBRE DE LA ESCUELA</h1>        
+                    <h1 class="colorr">UNIVERSIDAD TECNOLÓGICA DE TORREÓN</h1>    
+                </div>   
             </div>
         <div class="inicio">
                 <div class="texto1">
-                    <h3> Dirección: </h3>
-                    <p> Carretera Torreón - Matamoros Km 10, S/N, Ejido el Águila, 27400 Torreón, Coah.</p>
-                    
-                    <h3>Teléfono/s:</h3>
-                    <p>General: <span>8711023424</span><p>
-                    <p>Contabilidad: <span>8714025674</span><p>
-                    <p>Servicio Escolar: <span>8711768424</span></p>
-
+                    <form method="post">
+                        <div class="prin">
+                            <strong><label>Teléfono  y correo Servicios Escolares:</label></strong><p>8711023424 <br> escolares@edu.com</p>
+                        </div>
+                        <div class="prin">
+                            <strong><label>Teléfono y correo Becas:</label></strong><p>8717906785 <br> becas@edu.mx</p>
+                        </div>
+                        <div class="prin">
+                            <strong><label>Teléfono y correo contabilidad:</label></strong><p>8713465709  <br> conta@edu.com</p>
+                        </div>
+                    </form>
+                </div>
                     <div class="redes">
-                        <strong><h5>SÍGUENOS</h5></strong>
+                        <strong><h5></h5></strong>
                         <ul class="redsocial footer">
                             <li><a href="https://www.facebook.com/"> <img src="../../imagenes/facebook.png.crdownload" alt="1x1" width="50" height="50"></a></li>
                             <li><a href="https://www.instagram.com/"> <img src="../../imagenes/insta.png" alt="1x1" width="50" height="50"></a></li>
@@ -113,12 +133,14 @@
                             <li><a href="https://www.youtube.com/"> <img src="../../imagenes/youtube.png" alt="1x1" width="50" height="50"></a></li>
                         </ul>
                     </div> 
-                </div>
+
+                    <iframe class="imagen" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14400.755722003762!2d-103.3209182!3d25.5320829!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc18fad7b464487e4!2sUniversidad%20Tecnol%C3%B3gica%20de%20Torre%C3%B3n!5e0!3m2!1ses!2smx!4v1627930311630!5m2!1ses!2smx" width="60" height="45" 
+                    style="border:0; position:relative; top: 19%; left: 57%; transform: translate(-50%, -50%); height: 320px; width: 550px;" allowfullscreen="" loading="lazy"></iframe>
+                </div> 
+            </div>
+                
+        </div>          
                
-                <iframe class="imagen" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14400.755722003762!2d-103.3209182!3d25.5320829!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc18fad7b464487e4!2sUniversidad%20Tecnol%C3%B3gica%20de%20Torre%C3%B3n!5e0!3m2!1ses!2smx!4v1627930311630!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-             
-            
-        </div>                 
         </div>
 
             <!-- CONTENIDO (Página) -->
@@ -163,7 +185,7 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "al_avisos.php"

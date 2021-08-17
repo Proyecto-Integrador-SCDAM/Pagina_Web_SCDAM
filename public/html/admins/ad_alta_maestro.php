@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -248,10 +254,10 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_seleccionar_maestro.html"
+                    window.location.href = "ad_seleccionar_maestro.php"
                 },
                 DemoVar: function (event) {
                     alert(this.checkedGrupo[1]);
@@ -273,7 +279,7 @@
                         }
                     }
                     alert("Profesor dado de alta correctamente");
-                    window.location.href = "ad_seleccionar_maestro.html"
+                    window.location.href = "ad_seleccionar_maestro.php"
                 },
                 CargarTabla: function (event) {
                    axios({
@@ -339,7 +345,7 @@
                             .then((response) => {
                                 console.log(response);
                                 //alert("Alumno dado de alta correctamente");
-                                //window.location.href = "ad_seleccionar_maestro.html"
+                                //window.location.href = "ad_seleccionar_maestro.php"
                                 this.ResultadoConsulta=response.data;
                                 this.cantGrupos = this.ResultadoConsulta;
                                 this.AsignarGrupos();

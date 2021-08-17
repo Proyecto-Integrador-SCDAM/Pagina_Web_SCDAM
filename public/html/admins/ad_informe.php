@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,30 +78,7 @@
                     </tbody>
                 </table>
 
-                  <!-- OPERACIONES FOOTER -->
-                <div class="CentrarHor">
-                    <!-- NAVEGACIÓN -->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                        </ul>
-                    </nav>
-            </div>
+
             <!-- FOOTER -->
             <div v-if="(tipo_usuario == 'admin' || tipo_usuario == 'maestro') && c_footer" class="Footer-grid-container">
 
@@ -143,7 +126,7 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "ad_avisos.php"

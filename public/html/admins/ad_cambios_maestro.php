@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -159,7 +165,7 @@
                     <div class="row g-3">
                       <div class="col">
                         <h4>Correo<span class="badge bg-secondary"></span></h4>
-                        <input v-model="dCorreo" type="email" class="form-control" placeholder="Correo" aria-label="Last name">
+                        <input disabled v-model="dCorreo" type="email" class="form-control" placeholder="Correo" aria-label="Last name">
                       </div>
                       <div class="col">
                         <h4>Contraseña<span class="badge bg-secondary"></span></h4>
@@ -253,10 +259,10 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_seleccionar_maestro.html"
+                    window.location.href = "ad_seleccionar_maestro.php"
                 },
                 DemoVar: function (event) {
                     //alert(this.checkedGrupo[4]);
@@ -272,7 +278,7 @@
 
                     .then((response) => {
                         console.log(response);
-                        window.location.href = "ad_seleccionar_maestro.html";
+                        window.location.href = "ad_seleccionar_maestro.php";
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -378,7 +384,7 @@
                         }
                     }
                     alert("Se han realizado los cambios correctamente");
-                    //window.location.href = "ad_seleccionar_maestro.html"
+                    //window.location.href = "ad_seleccionar_maestro.php"
                 },
                 CargarTabla: function (event) {
                    axios({

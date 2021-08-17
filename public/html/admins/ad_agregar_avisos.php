@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -94,11 +100,11 @@
                 Titulo_Principal: "Agregar nuevo aviso",
                 Ctext:"",
                 titulo:"",
-                persona_av: "1",
+                persona_av: "0",
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "ad_avisos.php"
@@ -115,6 +121,7 @@
                         .then((response) => {
                                 console.log(response);
                                 alert("Anuncio publicado correctamente");
+                                window.location.href = "ad_avisos.php"
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -126,6 +133,13 @@
                         alert("Favor de llenar todos los campos obligatorios");
                     }
                 }
+            },
+            created: function(){
+              //CARGAR VARIABLES GLOBALES
+              let data = localStorage.getItem("idcon"); //global correo
+               if (data != null) {
+                   this.persona_av = data;
+               }
             },
             computed: {
 

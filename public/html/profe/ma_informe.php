@@ -1,16 +1,32 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificarmaestro.php")
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información alumno</title>
+    <title>Informe diario</title>
     <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
-    <link rel="stylesheet" media="all" href="../../css/styleinfoalu.css"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>  
+<body>
+
+    <!--HABILITAR TOOLTIPS-->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
     <!-- VUE -->
     <div id="app">
         <div class="grid-container" id="fixed">
@@ -35,43 +51,34 @@
                             <img src="../../imagenes/apagar.png" height="50%" width="30%">
                         </div>
                     </div>
-                    <div class="center">
-                        <h4>Datos del Alumno</h4>
-                        <form method="post">
-                            <div class="cent">
-                                <h6><b>Nombre:</b> {{ResultadoConsulta["NOMBRE"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Carrera:</b> {{ResultadoConsulta["ESPECIALIDAD"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Matrícula:</b> {{ResultadoConsulta["MATRICULA"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Grupo:</b> {{ResultadoConsulta["GRUPO"]}}</h6>
-                            </div>
-                            <div class="cent">
-                                <h6><b>Teléfono:</b> {{ResultadoConsulta["TELEFONO"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Género:</b> {{ResultadoConsulta["GENERO"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Acceso:</b> {{ResultadoConsulta["PERMISO"]}}</h6>
-                            </div> 
-                            <div class="cent">
-                                <h6><b>Causa de denegación:</b> {{ResultadoConsulta["CAUSA"]}}</h6>
-                            </div> 
-                        </form>
-                    </div>
+
                 </div>
             </div>
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
-
-            </div>
-
+              <!-- INPUT -->
+              <input v-on:keyup="Editando" v-model="searchval" type="text" class="form-control EspacioSup" aria-label="Text input with dropdown button" placeholder="Escriba un texto para buscar">
+                <!-- TABLA -->
+                <table class="table table-primary table-hover table-bordered border-info table-striped">
+                    <thead>
+                        <!-- COLUMNAS -->
+                      <tr>
+                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por número">#</th>
+                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Nombre">Nombre</th>
+                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Evento">Evento</th>
+                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Fecha">Fecha y hora</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="row in allData">
+                          <td> {{ row.id_reg }} </th>
+                          <td> {{ row.nombre }} </td>
+                          <td> {{ row.estado }} </td>
+                          <td> {{ row.fecha_hora }} </td>
+                        </tr>
+                    </tbody>
+                </table>
             <!-- FOOTER -->
             <div v-if="(tipo_usuario == 'admin' || tipo_usuario == 'maestro') && c_footer" class="Footer-grid-container">
 
@@ -96,8 +103,7 @@
             </div>
         </div>        
     </div>
-
-
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- VUE JS -->
@@ -114,41 +120,55 @@
                 c_volver: 1,
                 c_footer: 0,
                 tipo_usuario:"admin",
-                matcon: 0,
-                Titulo_Principal: "Información alumno",
-                ResultadoConsulta:[]
+                Titulo_Principal: "INFORME DIARIO",
+                allData: '',
+                searchval: '',
+                idcon: ''
             },
             methods: {
+                CerrarSesion: function (event) {
+                    window.location.href = "../../cerrarsession.php"
+                },
+                Volver: function (event) {
+                    window.location.href = "ma_avisos.php"
+                },
                 CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../php/ma_ver_alumno.php',
+                       url: '../../php/ma_registro.php',
                        action: 'fetchall',
                        data: {
-                           matcon: this.matcon
+                        idcon: this.idcon
                       }
                    }) .then((response) => {
-                    this.ResultadoConsulta = response.data;
+                    this.allData = response.data;
                    })
-               },
-               CerrarSesion: function (event) {
-                    window.location.href = "../index.html"
                 },
-                Volver: function (event) {
-                    window.location.href = "ma_seleccionar.html"
-                }
-            },
-            computed: {
-
+                Editando: function (event) {
+                axios({
+                       method: 'POST',
+                       url: '../../php/ma_registro_filtro.php',
+                       action: 'fetchall',
+                      data: {
+                           searchval: this.searchval,
+                           idcon: this.idcon
+                      }
+                   }) .then((response) => {
+                    this.allData = response.data;
+                   })
+                },
             },
             created: function(){
-              //CARGAR VARIABLES GLOBALES
-              let data = localStorage.getItem("editarper"); //global correo
+                //CARGAR VARIABLES GLOBALES
+               let data = localStorage.getItem("idcon"); //global id
                if (data != null) {
-                   this.matcon = data;
+                   this.idcon = data;
                }
               this.CargarTabla();
             },
+            computed: {
+
+            }
         });
     </script>
 </body>

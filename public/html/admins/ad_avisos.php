@@ -1,7 +1,7 @@
 <?php
     namespace proyecto;
 
-    //require ("../../verificaradmin.php")
+    require ("../../verificaradmin.php")
 ?>
 
 <!DOCTYPE html>
@@ -165,16 +165,16 @@
                     window.location.href = "../../cerrarsession.php"
                 },
                 EySadmin: function (event) {
-                    window.location.href = "ad_editar_grupos.html"
+                    window.location.href = "ad_editar_grupos.php"
                 },
                 Informe: function (event) {
-                    window.location.href = "ad_informe.html"
+                    window.location.href = "ad_informe.php"
                 },
                 Seleccionar: function (event) {
-                    window.location.href = "ad_seleccionar.html"
+                    window.location.href = "ad_seleccionar.php"
                 },
                 AGavisos: function(event){
-                    window.location.href = "ad_agregar_avisos.html"
+                    window.location.href = "ad_agregar_avisos.php"
                 },
                 allavisos: function(event){
                     axios({

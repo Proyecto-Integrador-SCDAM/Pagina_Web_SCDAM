@@ -123,7 +123,7 @@
 
                 <div class="Footer2-grid-item-izq footer-hvr" id="azul2" v-on:click="InfoAlu">
                     <div class="Centrar">
-                        <h2> Mi informacion </h2>
+                        <h2> Mi información </h2>
                     </div>
                 </div>
                 <div class="Footer2-grid-item-der footer-hvr" id="azul2" v-on:click="Contacto">
@@ -162,10 +162,10 @@
                     window.location.href = "../../cerrarsession.php";
                 },
                 InfoAlu: function (event) {
-                    window.location.href = "al_info.html";
+                    window.location.href = "al_info.php";
                 },
                 Contacto: function (event) {
-                    window.location.href = "al_contacto.html";
+                    window.location.href = "al_contacto.php";
                 },
                 allavisos: function(event){
                     axios({

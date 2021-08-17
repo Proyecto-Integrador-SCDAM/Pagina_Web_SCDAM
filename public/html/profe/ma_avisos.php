@@ -148,13 +148,13 @@
                     window.location.href = "../../cerrarsession.php";
                 },
                 Informe: function (event) {
-                    window.location.href = "ma_informe.html"
+                    window.location.href = "ma_informe.php"
                 },
                 Buscar: function (event) {
-                    window.location.href = "ma_seleccionar.html"
+                    window.location.href = "ma_seleccionar.php"
                 },
                 Grupos: function (event) {
-                    window.location.href = "ma_grupos.html"
+                    window.location.href = "ma_grupos.php"
                 },
                 allavisos: function(event){
                     axios({

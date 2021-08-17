@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -139,10 +145,10 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_editar_grupos.html"
+                    window.location.href = "ad_editar_grupos.php"
                 },
                 Guardar:function(){
                     if(this.Ngrado !="" && this.Nseccion !="" && this.Nturno !="Selecciona una opción" && this.Nperiodo !="Selecciona una opción" && this.Naño !="" ){

@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaralumno.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -100,13 +106,13 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "al_avisos.php"
                 },
                 Contacto: function (event) {
-                    window.location.href = "al_contacto.html"
+                    window.location.href = "al_contacto.php"
                 },
                 infAl: function(event){
                     axios({

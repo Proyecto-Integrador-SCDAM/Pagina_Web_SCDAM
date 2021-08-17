@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -254,10 +260,10 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_seleccionar.html"
+                    window.location.href = "ad_seleccionar.php"
                 },
                 CargarTabla: function (event) {
                    axios({
@@ -305,7 +311,7 @@
                             .then((response) => {
                                 console.log(response);
                                 alert("Alumno dado de alta correctamente");
-                                window.location.href = "ad_seleccionar.html"
+                                window.location.href = "ad_seleccionar.php"
                             })
                             .catch(function (error) {
                                 console.log(error);

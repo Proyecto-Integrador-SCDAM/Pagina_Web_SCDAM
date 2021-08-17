@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -164,18 +170,18 @@
                   window.location.href = "ad_cambios_admin.php" 
                 },
               CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
               Volver: function (event) {
                     window.location.href = "ad_avisos.php"
                 },
               SelAlumnos:function(event)
                 {
-                  window.location.href = "ad_seleccionar.html" 
+                  window.location.href = "ad_seleccionar.php" 
                 },
               SelAdministradores:function(event)
                 {
-                  window.location.href = "ad_seleccionar_admin.html" 
+                  window.location.href = "ad_seleccionar_admin.php" 
                 },
               DarAlta:function(event)
                 {
@@ -183,11 +189,11 @@
                 },
               SelProfesores:function(event)
                 {
-                  window.location.href = "ad_seleccionar_maestro.html" 
+                  window.location.href = "ad_seleccionar_maestro.php" 
                 },
               Admin1:function(event)
                 {
-                  window.location.href = "ad_cambios_admin.html" 
+                  window.location.href = "ad_cambios_admin.php" 
                 },
             },
             created: function(){

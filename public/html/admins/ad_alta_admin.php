@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -208,10 +214,10 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_seleccionar_admin.html"
+                    window.location.href = "ad_seleccionar_admin.php"
                 },
                 GuadarAlta:function(){
                     if (this.dNombre != "" && this.dAp != ""&& this.dAm != "" && this.dFecha != "" && this.dCorreo != "" && this.dContra != ""){
@@ -232,7 +238,7 @@
                             .then((response) => {
                                 console.log(response);
                                 alert("Administrador dado de alta correctamente");
-                                window.location.href = "ad_seleccionar_admin.html"
+                                window.location.href = "ad_seleccionar_admin.php"
                             })
                             .catch(function (error) {
                                 console.log(error);

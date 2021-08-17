@@ -1,3 +1,9 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -276,7 +282,7 @@
             },
             methods: {
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Cambios:function(){
                     //CAMBIOS PERSONA
@@ -309,7 +315,7 @@
                     });
                 },
                 Volver: function (event) {
-                    window.location.href = "ad_seleccionar.html"
+                    window.location.href = "ad_seleccionar.php"
                 },
                 CargarTabla:function(){
                     var params = new URLSearchParams();
@@ -403,7 +409,7 @@
 
                     .then((response) => {
                         console.log(response);
-                        window.location.href = "ad_seleccionar.html";
+                        window.location.href = "ad_seleccionar.php";
                     })
                     .catch(function (error) {
                         console.log(error);

@@ -1,24 +1,22 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificaradmin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe diario</title>
+    <title>Seleccionar</title>
     <link rel="stylesheet" media="all" href="../../css/stylebase.css"/>
+    <link rel="stylesheet" media="all" href="../../css/style.css"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
-    <!--HABILITAR TOOLTIPS-->
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-          return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    </script>
-
     <!-- VUE -->
     <div id="app">
         <div class="grid-container" id="fixed">
@@ -49,28 +47,49 @@
 
             <!-- CONTENIDO (Página) -->
             <div class="grid-itemContenido">
+
+              <!-- BOTONES -->
+              <div class="grid-itemContenido">
+                <div class="Banner-grid-container-filtros">
+                  <div class="Banner-grid-item-izq-filtros " id="azul3">
+                    <div class="d-grid">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAdministradores">Buscar administrador</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAlumnos">Buscar alumnos</button>
+                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo profesor</button>
+                  </div>
+                </div>
+              </div>
+
               <!-- INPUT -->
               <input v-on:keyup="Editando" v-model="searchval" type="text" class="form-control EspacioSup" aria-label="Text input with dropdown button" placeholder="Escriba un texto para buscar">
-                <!-- TABLA -->
-                <table class="table table-primary table-hover table-bordered border-info table-striped">
-                    <thead>
-                        <!-- COLUMNAS -->
-                      <tr>
-                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por número">#</th>
-                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Nombre">Nombre</th>
-                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Evento">Evento</th>
-                        <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Fecha">Fecha y hora</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="row in allData">
-                          <td> {{ row.id_reg }} </th>
-                          <td> {{ row.nombre }} </td>
-                          <td> {{ row.estado }} </td>
-                          <td> {{ row.fecha_hora }} </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+              <!-- TABLA -->
+              <table class="table table-primary table-hover table-bordered border-info table-striped">
+                <thead>
+                    <!-- COLUMNAS -->
+                  <tr>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por número">#</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Nombre">Nombre</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Evento">Teléfono</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Ubicación">Correo</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrar por Fecha">Acceso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- FILA 1 -->
+                  <tr v-for="row in allData">
+                    <td v-on:click="EditarPersona(row.ID_PERSONA)"> {{ row.ID_PERSONA }} </th>
+                    <td v-on:click="EditarPersona(row.ID_PERSONA)"> {{ row.NOMBRE }} </td>
+                    <td v-on:click="EditarPersona(row.ID_PERSONA)"> {{ row.TELEFONO }} </td>
+                    <td v-on:click="EditarPersona(row.ID_PERSONA)"> {{ row.CORREO }} </td>
+                    <td v-on:click="EditarPersona(row.ID_PERSONA)"> {{ row.PERMISO }} </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+
+            
+
             <!-- FOOTER -->
             <div v-if="(tipo_usuario == 'admin' || tipo_usuario == 'maestro') && c_footer" class="Footer-grid-container">
 
@@ -95,7 +114,7 @@
             </div>
         </div>        
     </div>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- VUE JS -->
@@ -112,50 +131,62 @@
                 c_volver: 1,
                 c_footer: 0,
                 tipo_usuario:"admin",
-                Titulo_Principal: "INFORME DIARIO",
+                Titulo_Principal: "Buscar profesor",
                 allData: '',
                 searchval: '',
-                idcon: ''
+                vista: 'info_prof'
             },
             methods: {
-                CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
-                },
-                Volver: function (event) {
-                    window.location.href = "ma_avisos.php"
-                },
-                CargarTabla: function (event) {
+              CargarTabla: function (event) {
                    axios({
                        method: 'POST',
-                       url: '../../php/ma_registro.php',
+                       url: '../../php/ad_buscar_admins.php',
                        action: 'fetchall',
                        data: {
-                        idcon: this.idcon
+                           vista: this.vista
                       }
                    }) .then((response) => {
                     this.allData = response.data;
                    })
-                },
-                Editando: function (event) {
+               },
+               Editando: function (event) {
                 axios({
                        method: 'POST',
-                       url: '../../php/ma_registro_filtro.php',
+                       url: '../../php/ad_buscar_admins_filtro.php',
                        action: 'fetchall',
                       data: {
                            searchval: this.searchval,
-                           idcon: this.idcon
+                           vista: this.vista
                       }
                    }) .then((response) => {
                     this.allData = response.data;
                    })
                 },
+                EditarPersona:function(event)
+                {
+                  localStorage.setItem("editarper", event);
+                  window.location.href = "ad_cambios_maestro.php" 
+                },
+              CerrarSesion: function (event) {
+                    window.location.href = "../../cerrarsession.php"
+                },
+                Volver: function (event) {
+                    window.location.href = "ad_avisos.php"
+                },
+              SelAlumnos:function(event)
+                {
+                  window.location.href = "ad_seleccionar.php" 
+                },
+              SelAdministradores:function(event)
+                {
+                  window.location.href = "ad_seleccionar_admin.php" 
+                },
+              DarAlta:function(event)
+                {
+                  window.location.href = "ad_alta_maestro.php" 
+                },
             },
             created: function(){
-                //CARGAR VARIABLES GLOBALES
-               let data = localStorage.getItem("idcon"); //global id
-               if (data != null) {
-                   this.idcon = data;
-               }
               this.CargarTabla();
             },
             computed: {

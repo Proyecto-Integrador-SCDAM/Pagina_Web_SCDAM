@@ -1,3 +1,11 @@
+<?php
+    namespace proyecto;
+
+    require ("../../verificarmaestro.php")
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -170,7 +178,7 @@
                 EditarPersona:function(event)
                 {
                   localStorage.setItem("editarper", event);
-                  window.location.href = "ma_info_alu.html" 
+                  window.location.href = "ma_info_alu.php" 
                 },
                 Ordenar: function (event) {
                 this.orden=event;
@@ -181,7 +189,7 @@
                 this.Editando();
                 },
                 CerrarSesion: function (event) {
-                    window.location.href = "../../index.html"
+                    window.location.href = "../../cerrarsession.php"
                 },
                 Volver: function (event) {
                     window.location.href = "ma_avisos.php"
