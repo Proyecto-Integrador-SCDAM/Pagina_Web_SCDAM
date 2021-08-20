@@ -111,7 +111,7 @@
                 },
                 Publicar: function (event) {
                     if(this.Ctext != "" && this.titulo != "" ){
-                        if(this.Ctext.length<255){
+                        if(this.Ctext.length<=255){
                             var params = new URLSearchParams();
                             params.append('titulo', this.titulo);
                             params.append('cuerpo', this.Ctext);
