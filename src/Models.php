@@ -6,7 +6,7 @@
     use PDO;
     use proyecto\Conexion;
     use function json_encode;
-
+    use Exception;
     class Models
     {
         /**
@@ -19,7 +19,7 @@
         
         public function __construct()
         {
-            $cc = new  Conexion("proyecto_integradora", "127.0.0.1:3307", "root", "admin"); 
+            $cc = new  Conexion("proyecto_integradora", "127.0.0.1", "root", ""); 
             self::$pdo = $cc->getPDO();
         }
         public function create(array $obj)

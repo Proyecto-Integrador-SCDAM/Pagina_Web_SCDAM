@@ -2,8 +2,8 @@
 
 //namespace Scdam;
 
-    $host = 'localhost:3307';
+    $host = 'localhost';
     $dbname = 'proyecto_integradora';
     $username = 'root';
-    $password = 'admin';
+    $password = '';
 ?>
