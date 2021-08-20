@@ -21,7 +21,9 @@
         #ALTA PERSONA
         $per=new Persona();        
         $per->AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC, $permiso, $causa_denegada);
-
+        $Hist=new historial();
+        $Hist->AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC, "1", "");
+        #alta en historial
         #ALTA ALUMNO
         $al=new Alumno();        
         $al->AltaAlumno($per->UltimaPersona(), $Aux, $especialidad);

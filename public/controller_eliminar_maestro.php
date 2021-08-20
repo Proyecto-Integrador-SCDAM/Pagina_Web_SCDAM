@@ -15,16 +15,6 @@
         $reg = new registros();
         $gp = new Grupo_profesor();
 
-
-        //Eliminar registro
-        $reg->EliminarRegistrosPersona($idcon);
-
-        //Eliminar grupos de profesor
-        $gp->EliminarGruposProfe($idcon);
-
-        //Eliminar maestro
-        $pro->EliminarMaestro($idcon);
-
         //Eliminar persona
         $per->EliminarPersona($idcon);
 

@@ -8,6 +8,9 @@
         require("../vendor/autoload.php");
        
         extract($_POST);       
+        #alta en historial
+        $Hist=new historial();
+        $Hist->AltaPersona($nombre, $apellido_paterno, $apellido_materno, $genero, $telefono, $correo, $fecha_nacimiento, $u_password, $NFC, "1", "");
         
         
         #ALTA PERSONA

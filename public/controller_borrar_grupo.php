@@ -11,9 +11,6 @@
         $al=new Alumno();        
         $al->EliminarGrupo($id_grup);
 
-        $gp=new Grupo_profesor();
-        $gp->EliminarGrupo($id_grup);
-
         $gr=new Grupo();
         $gr->EliminarGrupo($id_grup);
 

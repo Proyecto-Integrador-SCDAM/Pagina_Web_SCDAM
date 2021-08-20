@@ -56,6 +56,7 @@
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAdministradores">Buscar administrador</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelProfesores">Buscar profesor</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo alumno</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="Descargar"> Descargar historial de registros</button>
                 </div>
               </div>
             </div>
@@ -186,6 +187,10 @@
                 {
                   localStorage.setItem("editarper", event);
                   window.location.href = "ad_cambios_alumno.php" 
+                },
+                
+              Descargar:function(){
+                  window.location.href="crearexcel.php"
                 },
                 Ordenar: function (event) {
                 this.orden=event;

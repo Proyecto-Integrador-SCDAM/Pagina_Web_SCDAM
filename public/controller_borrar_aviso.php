@@ -7,9 +7,7 @@
    try{
         require("../vendor/autoload.php");
        
-        extract($_POST);       
-        $al=new personas_avisos();        
-        $al->BorrarAP($id_av);
+        extract($_POST);
 
         $gp=new avisos();
         $gp->eliminarAv($id_av);

@@ -19,7 +19,7 @@
         
         public function __construct()
         {
-            $cc = new  Conexion("proyecto_integradora", "127.0.0.1", "root", ""); 
+            $cc = new  Conexion("proyecto_integradora", "127.0.0.1", "adminjorge", "adminjorgerandom"); 
             self::$pdo = $cc->getPDO();
         }
         public function create(array $obj)

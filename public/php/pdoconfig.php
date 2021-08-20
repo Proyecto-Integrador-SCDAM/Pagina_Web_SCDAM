@@ -4,6 +4,6 @@
 
     $host = 'localhost';
     $dbname = 'proyecto_integradora';
-    $username = 'root';
-    $password = '';
+    $username = 'profesor';
+    $password = 'profesorrandom';
 ?>

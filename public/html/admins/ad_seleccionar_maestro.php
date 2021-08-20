@@ -56,6 +56,7 @@
                       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAdministradores">Buscar administrador</button>
                       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="SelAlumnos">Buscar alumnos</button>
                       <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="DarAlta"> Nuevo profesor</button>
+                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="Descargar"> Descargar historial de registros</button>
                   </div>
                 </div>
               </div>
@@ -184,6 +185,9 @@
               DarAlta:function(event)
                 {
                   window.location.href = "ad_alta_maestro.php" 
+                },
+              Descargar:function(){
+                  window.location.href="crearexcel.php"
                 },
             },
             created: function(){
